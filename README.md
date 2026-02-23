@@ -1,18 +1,3 @@
-Excellent choice 👌
-A **Company HR Management System with RBAC + Public/Private Routes + Layout Management** is a *very strong portfolio project* — especially since you're already comfortable with structured React apps.
-
-I'll give you:
-
-1. ✅ Feature breakdown
-2. ✅ Roles & permission matrix
-3. ✅ Route structure (public/private)
-4. ✅ Layout architecture
-5. ✅ Folder structure
-6. ✅ Clean RBAC architecture pattern
-7. ✅ Advanced upgrade ideas
-
----
-
 # 🏢 Project: Company HR Management System
 
 ---
@@ -71,31 +56,6 @@ You’ll use **Layout-Based Routing**
 
 ---
 
-### Example Routing (React Router v6+)
-
-```jsx
-<Routes>
-
-  {/* Public Routes */}
-  <Route element={<AuthLayout />}>
-    <Route path="/login" element={<Login />} />
-  </Route>
-
-  {/* Private Routes */}
-  <Route element={<PrivateRoute />}>
-    <Route element={<DashboardLayout />}>
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/employees" element={
-        <PermissionRoute permission="view_employee" />
-      } />
-    </Route>
-  </Route>
-
-</Routes>
-```
-
----
-
 # 🏗 5️⃣ Clean Folder Structure
 
 ```
@@ -131,107 +91,7 @@ src/
 
 ---
 
-# 🧠 6️⃣ RBAC Architecture (Clean Pattern)
-
----
-
-## Step 1️⃣ Permission Config
-
-```js
-export const PERMISSIONS = {
-  VIEW_EMPLOYEE: "view_employee",
-  ADD_EMPLOYEE: "add_employee",
-  DELETE_EMPLOYEE: "delete_employee",
-  APPLY_LEAVE: "apply_leave",
-  APPROVE_LEAVE: "approve_leave",
-};
-```
-
----
-
-## Step 2️⃣ Role Mapping
-
-```js
-export const ROLE_PERMISSIONS = {
-  admin: Object.values(PERMISSIONS),
-
-  hr: [
-    PERMISSIONS.VIEW_EMPLOYEE,
-    PERMISSIONS.ADD_EMPLOYEE,
-  ],
-
-  manager: [
-    PERMISSIONS.APPROVE_LEAVE,
-  ],
-
-  employee: [
-    PERMISSIONS.APPLY_LEAVE,
-  ]
-};
-```
-
----
-
-## Step 3️⃣ Auth Context
-
-```js
-const hasPermission = (permission) => {
-  return ROLE_PERMISSIONS[user.role]?.includes(permission);
-};
-```
-
----
-
-# 🧩 7️⃣ UI-Level Permission Rendering
-
-## Option A – Conditional Rendering
-
-```jsx
-{hasPermission(PERMISSIONS.ADD_EMPLOYEE) && (
-  <Button>Add Employee</Button>
-)}
-```
-
----
-
-## Option B – Reusable Component
-
-```jsx
-<Can permission={PERMISSIONS.ADD_EMPLOYEE}>
-  <Button>Add Employee</Button>
-</Can>
-```
-
----
-
-# 🔒 8️⃣ Route-Level Protection
-
-```jsx
-const PermissionRoute = ({ permission, children }) => {
-  if (!hasPermission(permission)) {
-    return <Navigate to="/unauthorized" />;
-  }
-  return children;
-};
-```
-
----
-
-# 🧭 9️⃣ Sidebar Dynamic Rendering
-
-```js
-const menuItems = [
-  { label: "Dashboard", path: "/dashboard" },
-  { label: "Employees", path: "/employees", permission: "view_employee" },
-  { label: "Leave", path: "/leave", permission: "apply_leave" }
-];
-```
-
-Render only allowed items.
-
----
-
-# 🏆 10️⃣ What Makes This Project Strong?
+# 🏆 6️⃣ What Makes This Project Strong?
 
 This shows:
 
