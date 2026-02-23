@@ -1,0 +1,31 @@
+import users from "../api/users";
+import { useUserContext } from "../contexts/userContext";
+import { useNavigate } from "react-router-dom";
+
+const LoginPage = () => {
+
+    const { handleLogin } = useUserContext();
+    const navigate = useNavigate();
+
+    return (
+        <div className="flex flex-col items-center gap-5 w-[30%]">
+            <h1 className="font-extrabold text-3xl underline">Log in as</h1>
+            <ul className="flex flex-col gap-3 w-full" >
+                {users.map(user => {
+                    return <li
+                        key={user.id}
+                        className="shadow-[0_3px_10px_rgb(0,0,0,0.2)] w-full cursor-pointer p-2 rounded border-l-2"
+                        onClick={() => {
+                            handleLogin(user.id);
+                            navigate("/dashboard")
+                        }}
+                    >
+                        {user.id} : {user.name} ({user.role})
+                    </li>
+                })}
+            </ul>
+        </div>
+    );
+};
+
+export default LoginPage;
