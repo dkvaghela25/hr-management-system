@@ -1,204 +1,84 @@
-const users = [
-  // ================= ADMIN =================
+const data = [
   {
-    id: "U1",
-    name: "Divyang Vaghela",
-    email: "admin@company.com",
-    role: "ADMIN",
-    department: "Management",
+    id: 1,
+    name: "Riya Maheshbhai Sharma",
+    email: "rms@company.com",
+    role: "HR",
+    department: "Human Resources",
     managerId: null,
-    isActive: true
+    isActive: true,
+    joiningDate: "Wed Mar 20 2019 10:15:00 GMT+0530 (India Standard Time)"
   },
-
-  // ================= HR =================
   {
-    id: "U2",
-    name: "Riya Sharma",
-    email: "riya.hr@company.com",
+    id: 2,
+    name: "Kunal Rameshbhai Mehta",
+    email: "krm@company.com",
     role: "HR",
     department: "Human Resources",
-    managerId: "U1",
-    isActive: true
+    managerId: null,
+    isActive: true,
+    joiningDate: "Fri Jul 10 2020 11:00:00 GMT+0530 (India Standard Time)"
   },
   {
-    id: "U3",
-    name: "Kunal Mehta",
-    email: "kunal.hr@company.com",
-    role: "HR",
-    department: "Human Resources",
-    managerId: "U1",
-    isActive: true
-  },
-
-  // ================= PROJECT MANAGERS =================
-  {
-    id: "U4",
-    name: "Amit Patel",
-    email: "amit.pm@company.com",
+    id: 3,
+    name: "Amit Harishbhai Patel",
+    email: "ahp@company.com",
     role: "PROJECT_MANAGER",
     department: "JS",
-    managerId: "U1",
-    isActive: true
+    managerId: null,
+    isActive: true,
+    joiningDate: "Fri Nov 01 2019 09:00:00 GMT+0530 (India Standard Time)"
   },
   {
-    id: "U5",
-    name: "Sneha Desai",
-    email: "sneha.pm@company.com",
+    id: 4,
+    name: "Sneha Rajeshbhai Desai",
+    email: "srd@company.com",
     role: "PROJECT_MANAGER",
     department: "PHP",
-    managerId: "U1",
-    isActive: true
+    managerId: null,
+    isActive: true,
+    joiningDate: "Mon Feb 17 2020 09:45:00 GMT+0530 (India Standard Time)"
   },
   {
-    id: "U6",
-    name: "Rahul Trivedi",
-    email: "rahul.pm@company.com",
+    id: 5,
+    name: "Rahul Sureshbhai Trivedi",
+    email: "rst@company.com",
     role: "PROJECT_MANAGER",
     department: "AI",
-    managerId: "U1",
-    isActive: true
+    managerId: null,
+    isActive: true,
+    joiningDate: "Tue May 25 2021 10:30:00 GMT+0530 (India Standard Time)"
   },
-
-  // ================= EMPLOYEES (Under PM U4) =================
   {
-    id: "U7",
-    name: "Priya Joshi",
-    email: "priya@company.com",
+    id: 6,
+    name: "Priya Nileshbhai Joshi",
+    email: "pnj@company.com",
     role: "EMPLOYEE",
     department: "JS",
-    managerId: "U4",
-    isActive: true
+    managerId: 4,
+    isActive: true,
+    joiningDate: "Mon Jan 10 2022 09:15:00 GMT+0530 (India Standard Time)"
   },
   {
-    id: "U8",
-    name: "Hardik Shah",
-    email: "hardik@company.com",
-    role: "EMPLOYEE",
-    department: "JS",
-    managerId: "U4",
-    isActive: true
-  },
-  {
-    id: "U9",
-    name: "Neha Verma",
-    email: "neha@company.com",
-    role: "EMPLOYEE",
-    department: "JS",
-    managerId: "U4",
-    isActive: true
-  },
-  {
-    id: "U10",
-    name: "Jay Soni",
-    email: "jay@company.com",
-    role: "EMPLOYEE",
-    department: "JS",
-    managerId: "U4",
-    isActive: true
-  },
-  {
-    id: "U11",
-    name: "Anjali Rao",
-    email: "anjali@company.com",
-    role: "EMPLOYEE",
-    department: "JS",
-    managerId: "U4",
-    isActive: true
-  },
-
-  // ================= EMPLOYEES (Under PM U5) =================
-  {
-    id: "U12",
-    name: "Vishal Kumar",
-    email: "vishal@company.com",
+    id: 7,
+    name: "Vishal Dineshbhai Kumar",
+    email: "vdk@company.com",
     role: "EMPLOYEE",
     department: "PHP",
-    managerId: "U5",
-    isActive: true
+    managerId: 5,
+    isActive: true,
+    joiningDate: "Tue Sep 14 2021 10:00:00 GMT+0530 (India Standard Time)"
   },
   {
-    id: "U13",
-    name: "Pooja Singh",
-    email: "pooja@company.com",
-    role: "EMPLOYEE",
-    department: "PHP",
-    managerId: "U5",
-    isActive: true
-  },
-  {
-    id: "U14",
-    name: "Arjun Nair",
-    email: "arjun@company.com",
-    role: "EMPLOYEE",
-    department: "PHP",
-    managerId: "U5",
-    isActive: true
-  },
-  {
-    id: "U15",
-    name: "Meera Iyer",
-    email: "meera@company.com",
-    role: "EMPLOYEE",
-    department: "PHP",
-    managerId: "U5",
-    isActive: true
-  },
-  {
-    id: "U16",
-    name: "Rohit Jain",
-    email: "rohit@company.com",
-    role: "EMPLOYEE",
-    department: "PHP",
-    managerId: "U5",
-    isActive: true
-  },
-
-  // ================= EMPLOYEES (Under PM U6) =================
-  {
-    id: "U17",
-    name: "Simran Kaur",
-    email: "simran@company.com",
+    id: 8,
+    name: "Simran Gurpreet Kaur",
+    email: "sgk@company.com",
     role: "EMPLOYEE",
     department: "AI",
-    managerId: "U6",
-    isActive: true
-  },
-  {
-    id: "U18",
-    name: "Yash Malhotra",
-    email: "yash@company.com",
-    role: "EMPLOYEE",
-    department: "AI",
-    managerId: "U6",
-    isActive: true
-  },
-  {
-    id: "U19",
-    name: "Tanvi Gupta",
-    email: "tanvi@company.com",
-    role: "EMPLOYEE",
-    department: "AI",
-    managerId: "U6",
-    isActive: true
-  },
-  {
-    id: "U20",
-    name: "Manav Bansal",
-    email: "manav@company.com",
-    role: "EMPLOYEE",
-    department: "AI",
-    managerId: "U6",
-    isActive: true
-  },
-  {
-    id: "U21",
-    name: "Krisha Patel",
-    email: "krisha@company.com",
-    role: "EMPLOYEE",
-    department: "AI",
-    managerId: "U6",
-    isActive: true
+    managerId: 6,
+    isActive: true,
+    joiningDate: "Mon May 09 2022 11:20:00 GMT+0530 (India Standard Time)"
   }
 ];
 
-export default users;
+export default data;
