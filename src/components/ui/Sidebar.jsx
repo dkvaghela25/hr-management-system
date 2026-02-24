@@ -8,7 +8,7 @@ const Sidebar = () => {
   return (
     <>
       {user &&
-        <div className="w-64 bg-slate-800 text-white p-5">
+        <div className="w-56 bg-slate-800 text-white p-5">
           <h2 className="text-xl font-bold mb-8">HRMS</h2>
 
           <nav className="space-y-3">

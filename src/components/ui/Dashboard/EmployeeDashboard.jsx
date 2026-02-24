@@ -24,14 +24,15 @@ const EmployeeDashboard = () => {
                 <h1 className="font-extrabold text-3xl underline">Your Leave Requests</h1>
                 <div className={`bg-white p-6 rounded-xl shadow-sm w-full`}>
                     <div className="overflow-x-auto">
-                        <table className="w-full text-left table-fixed">
+                        <table className="w-full text-left border-spacing-5 table-fixed">
                             <thead>
                                 <tr className="border-b">
                                     <th className="py-2 w-[12%]">From</th>
                                     <th className="py-2 w-[12%]">To</th>
                                     <th className="py-2 w-[8%]">Days</th>
                                     <th className="py-2 w-[12%]">Leave Type</th>
-                                    <th className="py-2 w-[33%]">Note</th>
+                                    <th className="py-2 w-[30%]">Note</th>
+                                    <th className="py-2 w-[25%]">Reason</th>
                                     <th className="py-2 text-center w-[12%]">Status</th>
                                 </tr>
                             </thead>
@@ -46,6 +47,7 @@ const EmployeeDashboard = () => {
                                                 <td className="py-2">{request.days}</td>
                                                 <td className="py-2">{request.leaveType}</td>
                                                 <td className="py-2">{request.note}</td>
+                                                <td className="py-2">{request.reason || "N/A"}</td>
                                                 <td className={`py-2 flex justify-center`}>
                                                     <span className={`text-white rounded-full p-[5px_20px] text-center border border-black ${getBgColor(request.status)}`}>
                                                         {request.status}
