@@ -5,6 +5,9 @@ import Dashboard from "./pages/Dashboard";
 import Employees from "./pages/Employees";
 import AddEmployee from "./pages/AddEmployee";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
+import LeaveRequests from "./pages/LeaveRequests";
+import ApplyLeave from "./pages/ApplyLeave";
+import TakeAction from "./pages/TakeAction";
 
 const App = () => {
 
@@ -32,10 +35,30 @@ const App = () => {
             element: <Employees />
           },
           {
-            element: <ProtectedRoutes role="HR"/>,
+            element: <ProtectedRoutes role="HR" />,
             children: [{
               path: '/add_employee',
               element: <AddEmployee />
+            }]
+          },
+          {
+            element: <ProtectedRoutes role="PROJECT_MANAGER" />,
+            children: [
+              {
+                path: '/leave_requests',
+                element: <LeaveRequests />
+              },
+              {
+                path: '/take_action/:requestId',
+                element: <TakeAction />
+              },
+            ]
+          },
+          {
+            element: <ProtectedRoutes role="EMPLOYEE" />,
+            children: [{
+              path: '/apply_leave',
+              element: <ApplyLeave />
             }]
           },
         ]

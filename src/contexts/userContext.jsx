@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useState } from "react";
-import data from "../api/users";
+import userData from "../api/users";
+import leaveRequestsData from "../api/leaveRequests";
 
 export const UserContext = createContext();
 
@@ -9,15 +10,20 @@ export const UserProvider = ({ children }) => {
 
     const currentUsers = JSON.parse(localStorage.getItem('users'));
     const currentUser = JSON.parse(localStorage.getItem('user'));
+    const currentLeaveRequests = JSON.parse(localStorage.getItem('leaveRequests'));
 
     const [users, setUsers] = useState(currentUsers);
     const [user, setUser] = useState(currentUser);
+    const [leaveRequests, setLeaveRequests] = useState(currentLeaveRequests);
 
-    console.log(users);
-    
     if (currentUsers === null) {
-        localStorage.setItem('users', JSON.stringify(data))
-        setUsers(data)
+        localStorage.setItem('users', JSON.stringify(userData))
+        setUsers(userData)
+    }
+
+    if (currentLeaveRequests === null) {
+        localStorage.setItem('leaveRequests', JSON.stringify(leaveRequestsData))
+        setLeaveRequests(leaveRequestsData)
     }
 
     useEffect(() => {
@@ -27,6 +33,10 @@ export const UserProvider = ({ children }) => {
     useEffect(() => {
         localStorage.setItem('users', JSON.stringify(users))
     }, [users])
+
+    useEffect(() => {
+        localStorage.setItem('leaveRequests', JSON.stringify(leaveRequests))
+    }, [leaveRequests])
 
     const handleLogin = (userId) => {
         console.log(users);
@@ -38,8 +48,20 @@ export const UserProvider = ({ children }) => {
         setUser(null);
     }
 
+    const value = {
+        users,
+        setUsers,
+        user,
+        setUser,
+        leaveRequests,
+        setLeaveRequests,
+        handleLogin,
+        handleLogout
+    }
+
+
     return (
-        <UserContext.Provider value={{ users, user, setUsers, setUser, handleLogin, handleLogout }}>{children}</UserContext.Provider>
+        <UserContext.Provider value={value}>{children}</UserContext.Provider>
     )
 
 }

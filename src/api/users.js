@@ -7,7 +7,7 @@ const data = [
     department: "Human Resources",
     managerId: null,
     isActive: true,
-    joiningDate: "Wed Mar 20 2019 10:15:00 GMT+0530 (India Standard Time)"
+    joiningDate: "20/03/2019"
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const data = [
     department: "Human Resources",
     managerId: null,
     isActive: true,
-    joiningDate: "Fri Jul 10 2020 11:00:00 GMT+0530 (India Standard Time)"
+    joiningDate: "10/07/2020"
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const data = [
     department: "JS",
     managerId: null,
     isActive: true,
-    joiningDate: "Fri Nov 01 2019 09:00:00 GMT+0530 (India Standard Time)"
+    joiningDate: "01/11/2019"
   },
   {
     id: 4,
@@ -37,7 +37,7 @@ const data = [
     department: "PHP",
     managerId: null,
     isActive: true,
-    joiningDate: "Mon Feb 17 2020 09:45:00 GMT+0530 (India Standard Time)"
+    joiningDate: "17/02/2020"
   },
   {
     id: 5,
@@ -47,7 +47,7 @@ const data = [
     department: "AI",
     managerId: null,
     isActive: true,
-    joiningDate: "Tue May 25 2021 10:30:00 GMT+0530 (India Standard Time)"
+    joiningDate: "25/05/2021"
   },
   {
     id: 6,
@@ -55,9 +55,9 @@ const data = [
     email: "pnj@company.com",
     role: "EMPLOYEE",
     department: "JS",
-    managerId: 4,
+    managerId: 3,
     isActive: true,
-    joiningDate: "Mon Jan 10 2022 09:15:00 GMT+0530 (India Standard Time)"
+    joiningDate: "10/01/2022"
   },
   {
     id: 7,
@@ -65,9 +65,9 @@ const data = [
     email: "vdk@company.com",
     role: "EMPLOYEE",
     department: "PHP",
-    managerId: 5,
+    managerId: 4,
     isActive: true,
-    joiningDate: "Tue Sep 14 2021 10:00:00 GMT+0530 (India Standard Time)"
+    joiningDate: "14/09/2021"
   },
   {
     id: 8,
@@ -75,9 +75,9 @@ const data = [
     email: "sgk@company.com",
     role: "EMPLOYEE",
     department: "AI",
-    managerId: 6,
+    managerId: 5,
     isActive: true,
-    joiningDate: "Mon May 09 2022 11:20:00 GMT+0530 (India Standard Time)"
+    joiningDate: "09/05/2022"
   }
 ];
 

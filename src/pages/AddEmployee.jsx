@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useUserContext } from "../contexts/userContext";
 import { FaPlus } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const AddEmployee = () => {
 
     const { users, setUsers } = useUserContext();
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         name: "",
@@ -42,6 +44,7 @@ const AddEmployee = () => {
         }
 
         setUsers(prev => [...prev, newUser])
+        navigate("/employees")
     }
 
     return (
