@@ -5,3 +5,5 @@ export const departments = ['JS', 'PHP', 'AI'];
 export const randomFirstName = ["Arjun", "Aditi", "Ishaan", "Priya", "Vihaan", "Ananya", "Kabir", "Saanvi", "Rohan", "Diya"]
 export const randomMiddleName = ["Rajeshbhai", "Sureshbhai", "Rameshbhai", "Dineshbhai", "Maheshbhai", "Alpeshbhai", "Vijaybhai", "Sanjaybhai", "Pareshbhai", "Ashokbhai"]
 export const randomLastName = ["Sharma", "Patel", "Verma", "Gupta", "Reddy", "Iyer", "Khan", "Malhotra", "Joshi", "Das"]
+
+export const availableRowsPerPage = [5, 10, 15, 20, 25]

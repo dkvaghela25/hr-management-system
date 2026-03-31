@@ -18,22 +18,28 @@ const LoginPage = () => {
     username: "",
     password: "",
   });
-  const [error, setError] = useState("");
+
+  const [errors, setErrors] = useState({
+    username: "",
+    password: ""
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    if (error) setError("");
+    setErrors({ ...errors, [name]: "" })
   };
 
   const handleSubmit = (e) => {
+
     e.preventDefault();
-    if (!formData.username) return setError("Username is required field")
-    if (!formData.password) return setError("Password is required field")
+    if (!formData.username) return setErrors(prev => ({ ...prev, username: "Username is required field" }));
+    if (!formData.password) return setErrors(prev => ({ ...prev, password: "Password is required field" }))
 
     const user = users.find(user => user.username === formData.username);
+    if (!user) return setErrors(prev => ({ ...prev, username: "User does not exist with this username" }));
 
-    if (user?.password !== formData.password) return setError("Invalid Credentials");
+    if (user?.password !== formData.password) return setErrors(prev => ({ ...prev, password: "Password does not match." }));
 
     setUser(user);
     navigate("/dashboard");
@@ -75,45 +81,47 @@ const LoginPage = () => {
             <form className="space-y-6">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Username
+                  Username <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   name="username"
                   placeholder="Enter your username"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#1D293D] focus:border-transparent outline-none transition-all"
+                  className={`w-full px-4 py-3 rounded-lg border border-gray-300 outline-none transition-all ${errors.username ? "border-red-500" : ""}`}
                   value={formData.username}
                   onChange={handleChange}
                   required
                 />
+                {errors.username && (<div className="text-red-500 text-sm mt-1">* {errors.username}</div>)}
+
               </div>
 
-              {/* Password Field */}
               <div className="relative">
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Password
+                  Password <span className="text-red-500">*</span>
                 </label>
                 <input
-                  type={ showPassword ? "text" : "password"}
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   placeholder="••••••••"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#1D293D] focus:border-transparent outline-none transition-all"
+                  className={`w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#1D293D] focus:border-transparent outline-none transition-all ${errors.password ? "border-red-500" : ""}`}
                   value={formData.password}
                   onChange={handleChange}
                   required
                 />
+                {errors.password && (<div className="text-red-500 text-sm mt-1">* {errors.password}</div>)}
+
                 <button type="button" className="absolute bottom-3 right-3 text-2xl text-gray-700" onClick={() => setShowPassword(prev => !prev)}>
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
 
-              {error && (<div className="text-red-600 text-sm">* {error}</div>)}
-
               <div className="flex flex-col gap-3 pt-2">
                 <button
+                  disabled={!formData.username || !formData.password}
                   type="submit"
                   onClick={handleSubmit}
-                  className="w-full bg-[#1D293D] hover:bg-[#2a3b57] text-white font-bold py-3 rounded-lg transition-colors shadow-md"
+                  className={`w-full bg-[#1D293D] hover:bg-[#2a3b57] text-white font-bold py-3 rounded-lg transition-colors shadow-md disabled:text-slate-100 disabled:bg-[#2a3b57] disabled:cursor-not-allowed`}
                 >
                   Login
                 </button>
@@ -130,7 +138,7 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-      {isOpen && <GeneratedUserData newUser={newUser} setIsOpen={setIsOpen} />}
+      {isOpen && <GeneratedUserData newUser={newUser} setIsOpen={setIsOpen} setFormData={setFormData} />}
     </>
   );
 };

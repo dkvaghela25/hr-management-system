@@ -15,7 +15,12 @@ const ApplyLeave = () => {
         note: ""
     })
 
-    const [error, setError] = useState("");
+    const [errors, setErrors] = useState({
+        from: "",
+        to: "",
+        leaveType: "",
+        note: ""
+    })
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -52,25 +57,10 @@ const ApplyLeave = () => {
     const applyLeave = (e) => {
         e.preventDefault();
 
-        if(!formData.from) {
-            setError("Please Select From Date");
-            return;
-        }
-
-        if(!formData.to) {
-            setError("Please Select To Date");
-            return;
-        }
-        
-        if(!formData.leaveType) {
-            setError("Please Select Leave Type");
-            return;
-        }
-        
-        if(!formData.note) {
-            setError("Please write something in note");
-            return;
-        }
+        if (!formData.from) return setErrors(prev => ({ ...prev, from: "Please Select From Date" }));
+        if (!formData.to) return setErrors(prev => ({ ...prev, to: "Please Select To Date" }));
+        if (!formData.leaveType) return setErrors(prev => ({ ...prev, leaveType: "Please Select Leave Type" }));
+        if (!formData.note) return setErrors(prev => ({ ...prev, note: "Please write something in note" }));
 
         const newRequest = {
             id: Math.max(...(leaveRequests.map(request => request.id))) + 1,
@@ -94,13 +84,13 @@ const ApplyLeave = () => {
                 <div className="w-[50%] bg-white opacity relative flex flex-col gap-5 p-5 items-center rounded">
                     <h1 className="font-extrabold text-2xl underline">Apply Leave</h1>
                     <form action="" className="flex flex-col gap-5 w-full">
-                        <div className="w-full grid grid-cols-[225px_112.5px_225px] gap-5">
-                            <div className="flex flex-col">
-                                <label htmlFor="from">From *</label>
+                        <div className="w-full flex justify-between">
+                            <div className="flex flex-col gap-1 w-[40%]">
+                                <label htmlFor="from">From <span className="text-red-500">*</span></label>
                                 <input
                                     required
                                     name="from"
-                                    className="border border-black p-2 rounded"
+                                    className={`border border-black p-2 rounded ${errors.from ? "border-red-500" : ""}`}
                                     type="date"
                                     value={formData.from}
                                     onChange={handleChange}
@@ -108,7 +98,7 @@ const ApplyLeave = () => {
                                     max={formatDate(new Date(new Date().getTime() + (15 * 24 * 60 * 60 * 1000)))}
                                 />
                             </div>
-                            <div className="flex flex-col">
+                            <div className="flex flex-col gap-1 w-[15%]">
                                 <label htmlFor="days">Days</label>
                                 <input
                                     disabled
@@ -119,13 +109,13 @@ const ApplyLeave = () => {
                                     value={formData.days}
                                 />
                             </div>
-                            <div className="flex flex-col">
-                                <label htmlFor="to">To *</label>
+                            <div className="flex flex-col gap-1 w-[40%]">
+                                <label htmlFor="to">To <span className="text-red-500">*</span></label>
                                 <input
                                     disabled={!formData.from}
                                     required
                                     name="to"
-                                    className="border border-black p-2 rounded"
+                                    className={`border border-black p-2 rounded ${errors.to ? "border-red-500" : ""}`}
                                     type="date"
                                     value={formData.to}
                                     onChange={handleChange}
@@ -134,22 +124,29 @@ const ApplyLeave = () => {
                                 />
                             </div>
                         </div>
-                        <select required name="leaveType" className="border border-black p-2 rounded" value={formData.leaveType} onChange={handleChange} >
-                            <option value="">Leave Type *</option>
-                            <option value="Paid Leave">Paid Leave</option>
-                            <option value="Casual Leave">Casual Leave</option>
-                            <option value="Sick Leave">Sick Leave</option>
-                            <option value="Unpaid Leave">Unpaid Leave</option>
-                        </select>
-                        <textarea
-                            required
-                            name="note"
-                            className="border border-black p-2 rounded"
-                            value={formData.note}
-                            onChange={handleChange}
-                            placeholder="Note *"
-                        ></textarea>
-                        {error && <p className="text-[14px] text-red-500">* {error}</p> }
+
+                        <div className="flex flex-col gap-1">
+                            <label htmlFor="from">Leave Type <span className="text-red-500">*</span></label>
+                            <select required name="leaveType" className={`border border-black p-2 rounded ${formData.leaveType === "" ? "text-slate-500" : ""} ${errors.leaveType ? "border-red-500" : ""}`} value={formData.leaveType} onChange={handleChange} >
+                                <option value="">Select Leave Type</option>
+                                <option value="Paid Leave">Paid Leave</option>
+                                <option value="Casual Leave">Casual Leave</option>
+                                <option value="Sick Leave">Sick Leave</option>
+                                <option value="Unpaid Leave">Unpaid Leave</option>
+                            </select>
+                        </div>
+
+                        <div className="flex flex-col gap-1">
+                            <label htmlFor="from">Note <span className="text-red-500">*</span></label>
+                            <textarea
+                                required
+                                name="note"
+                                className={`border border-black p-2 rounded ${errors.from ? "border-red-500" : ""}`}
+                                value={formData.note}
+                                onChange={handleChange}
+                                placeholder="Note"
+                            ></textarea>
+                        </div>
                         <button onClick={applyLeave} className="bg-[#1D293D] m-auto text-white p-[10px_20px] flex gap-3 items-center rounded cursor-pointer w-fit"><span>Apply</span></button>
                     </form>
                 </div>

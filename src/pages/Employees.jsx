@@ -1,10 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/userContext";
 import { FaPlus } from "react-icons/fa";
+import PaginationBar from "../components/ui/PaginationBar";
+import { useState } from "react";
 
 const Employees = () => {
 
     const { user, users } = useUserContext();
+
+    const [tableRows, setTableRows] = useState([]);
+    const [filteredRows, setFilteredRows] = useState(users);
 
     const navigate = useNavigate();
 
@@ -25,7 +30,7 @@ const Employees = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {users.map(user => {
+                                {tableRows.map(user => {
                                     return (
                                         <tr key={user.id} className="border-b hover:bg-gray-50">
                                             <td className="py-2">{user.id}</td>
@@ -42,6 +47,8 @@ const Employees = () => {
                 </div>
                 {user?.role === "HR" && <button onClick={() => navigate("/add_employee")} className="bg-[#1D293D] text-white p-[10px_20px] flex gap-3 items-center rounded cursor-pointer"><FaPlus /> <span>Add Employee</span></button>}
             </div>
+
+            <PaginationBar filteredRows={filteredRows} setTableRows={setTableRows} />
         </>
     );
 };

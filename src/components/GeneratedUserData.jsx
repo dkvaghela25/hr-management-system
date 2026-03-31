@@ -2,9 +2,17 @@ import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { MdContentCopy } from "react-icons/md";
 
-const GeneratedUserData = ({ newUser, setIsOpen }) => {
+const GeneratedUserData = ({ newUser, setIsOpen, setFormData }) => {
 
     const [copiedValue, setCopiedValue] = useState(null);
+
+    const handleClose = () => {
+        setIsOpen(false)
+        setFormData({
+            username: newUser.username,
+            password: newUser.password,
+        })
+    }
 
     const copyToClipboard = (value) => {
         navigator.clipboard.writeText(value);
@@ -18,7 +26,7 @@ const GeneratedUserData = ({ newUser, setIsOpen }) => {
                 <div className="bg-white shadow-xl rounded-2xl overflow-hidden border border-slate-100">
                     <div className="bg-slate-800 px-6 py-4 flex justify-between items-center">
                         <h2 className="text-white font-semibold tracking-wide">New User Data</h2>
-                        <IoClose onClick={() => setIsOpen(false)} className="w-6 h-6 text-white font-semibold" />
+                        <IoClose onClick={handleClose} className="w-6 h-6 text-white font-semibold" />
                     </div>
 
                     <div className="px-6 py-3">
