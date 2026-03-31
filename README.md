@@ -43,12 +43,8 @@ A modern, role-based HR management application built with React, Vite, and Tailw
 |---------|-------|----|---------| ---------|
 | View Dashboard | ✅ | ✅ | ✅ | ✅ |
 | Add Employee | ✅ | ✅ | ❌ | ❌ |
-| Edit Employee | ✅ | ✅ | ❌ | ❌ |
-| Delete Employee | ✅ | ❌ | ❌ | ❌ |
 | Apply Leave | ❌ | ❌ | ❌ | ✅ |
 | Approve Leave | ❌ | ❌ | ✅ | ❌ |
-| View Salary | ✅ | ✅ | ❌ | Own Only |
-| Manage Roles | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
@@ -115,7 +111,7 @@ src/
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/dkvaghela25/hr-management-system.git
    cd hr-management-system
    ```
 
@@ -206,55 +202,3 @@ The project uses **Tailwind CSS** for styling with:
 - Mobile-friendly layouts
 
 ---
-
-## 📱 Mobile Responsive
-
-The application is fully responsive and works seamlessly on:
-- Desktop
-- Tablet
-- Mobile devices
-
----
-
-## 🐛 Troubleshooting
-
-**Port already in use?**
-```bash
-npm run dev -- --port 3000
-```
-
-**Clear node_modules and reinstall:**
-```bash
-rm -rf node_modules
-npm install
-```
-
-**Build fails?**
-- Ensure you're using Node.js v16 or higher
-- Check for TypeScript/ESLint errors: `npm run lint`
-
----
-
-## 🤝 Contributing
-
-1. Create a feature branch (`git checkout -b feature/amazing-feature`)
-2. Commit your changes (`git commit -m 'Add amazing feature'`)
-3. Push to the branch (`git push origin feature/amazing-feature`)
-4. Open a Pull Request
-
----
-
-## 📄 License
-
-This project is open source and available under the MIT License.
-
----
-
-## 📞 Support
-
-For issues, questions, or suggestions, please create an issue in the repository or contact the development team.
-
----
-
-**Version**: 0.0.0  
-**Last Updated**: February 2026
