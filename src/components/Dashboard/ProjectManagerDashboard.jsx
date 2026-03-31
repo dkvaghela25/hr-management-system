@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../../../contexts/userContext";
+import { useUserContext } from "../../contexts/userContext";
 
-const LeaveRequests = () => {
+const ProjectManagerDashboard = () => {
 
     const { users, user, leaveRequests } = useUserContext();
 
@@ -75,5 +75,5 @@ const LeaveRequests = () => {
     );
 };
 
-export default LeaveRequests;
+export default ProjectManagerDashboard;
 

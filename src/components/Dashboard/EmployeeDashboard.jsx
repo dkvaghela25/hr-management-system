@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../../../contexts/userContext";
+import { useUserContext } from "../../contexts/userContext";
 
 const EmployeeDashboard = () => {
 

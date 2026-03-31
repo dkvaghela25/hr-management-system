@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../ui/Navbar";
-import Sidebar from "../ui/Sidebar";
+import Sidebar from "./Sidebar";
+import Navbar from "./Navbar";
 
 const AppLayout = () => {
 
@@ -10,7 +10,7 @@ const AppLayout = () => {
 
       <div className="flex-1 flex flex-col">
         <Navbar />
-        <div className="p-6 flex items-center justify-center w-full relative">
+        <div className="p-6 flex flex-col flex-1 items-center  w-full relative">
           <Outlet />
         </div>
       </div>
