@@ -25,7 +25,7 @@ const Navbar = () => {
           <img className="w-10 h-10 cursor-pointer" onClick={openMenu} src="https://img.icons8.com/?size=100&id=7819&format=png&color=000000" alt="" />
         </div>
       </div>
-      {isOpen &&
+      {(isOpen && user) &&
         <div
           className="absolute right-5 top-20 bg-white p-[5px_20px] z-20 rounded cursor-pointer"
           onClick={
