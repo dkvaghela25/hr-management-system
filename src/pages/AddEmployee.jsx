@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useUserContext } from "../contexts/userContext";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { getRandomElement } from "../utils/getRandomElement";
+import { randomCharacters } from "../constants";
 
 const AddEmployee = () => {
 
@@ -34,6 +36,8 @@ const AddEmployee = () => {
 
         const newUser = {
             id: Math.max(...(users.map(user => user.id))) + 1,
+            username: Array.from({ length: 8 }, () => getRandomElement(randomCharacters)).join(""),
+            password: Array.from({ length: 12 }, () => getRandomElement(randomCharacters)).join(""),
             name,
             role,
             department,

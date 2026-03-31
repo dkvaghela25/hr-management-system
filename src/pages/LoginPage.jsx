@@ -4,6 +4,7 @@ import { useUserContext } from "../contexts/userContext";
 import GeneratedUserData from "../components/GeneratedUserData";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { getRandomElement } from "../utils/getRandomElement";
 
 const LoginPage = () => {
 
@@ -37,11 +38,6 @@ const LoginPage = () => {
     setUser(user);
     navigate("/dashboard");
 
-  }
-
-  function getRandomElement(arr) {
-    const index = Math.floor(Math.random() * arr.length);
-    return arr[index];
   }
 
   const handleClick = () => {
