@@ -5,10 +5,10 @@ import Navbar from "./Navbar";
 const AppLayout = () => {
 
   return (
-    <div className="flex min-h-screen bg-gray-100 overflow-x-hidden">
+    <div className="relative flex min-h-screen bg-gray-100 overflow-x-hidden">
       <Sidebar />
 
-      <div className="flex-1 flex flex-col min-w-0 overflow-x-hidden">
+      <div className="absolute w-[82%] -right-1 flex flex-col min-w-0 overflow-x-hidden">
         <Navbar />
         <div className="p-6 flex flex-col flex-1 items-center w-full min-w-0 relative overflow-x-hidden">
           <Outlet />

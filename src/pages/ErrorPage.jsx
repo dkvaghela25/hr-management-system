@@ -41,8 +41,9 @@ const ErrorPage = () => {
     }
 
     return (
-        <div className="h-screen flex items-center justify-center">
+        <div className="h-screen flex flex-col gap-10 items-center justify-center">
             <h1 className="text-2xl font-semibold text-red-600">Something Went Wrong</h1>
+            <p>{error.name} : {error.message}</p>
         </div>
     );
 };

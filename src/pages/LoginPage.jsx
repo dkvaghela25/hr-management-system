@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { departments, randomCharacters, randomFirstName, randomLastName, randomMiddleName, roles } from "../constants";
 import { useUserContext } from "../contexts/userContext";
-import GeneratedUserData from "../components/GeneratedUserData";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { getRandomElement } from "../utils/getRandomElement";
+import UserData from "../components/UserData";
+import { MdLogin } from "react-icons/md";
 
 const LoginPage = () => {
 
@@ -121,9 +122,9 @@ const LoginPage = () => {
                   disabled={!formData.username || !formData.password}
                   type="submit"
                   onClick={handleSubmit}
-                  className={`w-full bg-[#1D293D] hover:bg-[#2a3b57] text-white font-bold py-3 rounded-lg transition-colors shadow-md disabled:text-slate-100 disabled:bg-[#2a3b57] disabled:cursor-not-allowed`}
+                  className={`w-full flex gap-2 items-center justify-center bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-lg transition-colors shadow-md disabled:text-slate-100 disabled:bg-indigo-500 disabled:cursor-not-allowed`}
                 >
-                  Login
+                  <MdLogin size={20} /> Login
                 </button>
 
                 <button
@@ -138,7 +139,7 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-      {isOpen && <GeneratedUserData newUser={newUser} setIsOpen={setIsOpen} setFormData={setFormData} />}
+      {isOpen && <UserData userData={newUser} setIsOpen={setIsOpen} setFormData={setFormData} />}
     </>
   );
 };

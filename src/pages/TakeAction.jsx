@@ -148,7 +148,6 @@ const TakeAction = () => {
                                         Reason <span className="text-red-500">*</span>
                                     </label>
                                     <textarea
-                                        required
                                         name="reason"
                                         className={`w-full px-4 py-3 rounded-lg border border-gray-300 outline-none transition-all ${errors.reason ? "border-red-500" : ""}`}
                                         value={formData.reason}

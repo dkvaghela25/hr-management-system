@@ -15,7 +15,7 @@ const UserList = () => {
                     {users.map(user => {
                         return <li
                             key={user.id}
-                            className="shadow-[0_3px_10px_rgb(0,0,0,0.2)] w-full cursor-pointer p-2 rounded border-l-2"
+                            className="shadow-[0_3px_10px_rgb(0,0,0,0.2)] w-full cursor-pointer p-2 rounded border-indigo-600 bg-white border-l-2"
                             onClick={() => {
                                 handleLogin(user.id);
                                 navigate("/dashboard")

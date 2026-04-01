@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 64" width="220" height="64">
+  <!-- Icon background square - indigo to match active nav color -->
+  <rect x="0" y="4" width="52" height="52" rx="10" fill="#4F46E5"/>
+
+  <!-- People silhouette - front person -->
+  <circle cx="20" cy="20" r="7" fill="white"/>
+  <rect x="10" y="29" width="20" height="12" rx="6" fill="white"/>
+
+  <!-- People silhouette - back person -->
+  <circle cx="36" cy="18" r="5.5" fill="white" opacity="0.6"/>
+  <rect x="27" y="26" width="16" height="10" rx="5" fill="white" opacity="0.6"/>
+
+  <!-- Pulse line -->
+  <polyline points="2,50 10,50 15,41 20,58 25,45 30,50 42,50 52,50" fill="none" stroke="#A5B4FC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Wordmark -->
+  <text x="62" y="34" font-family="Georgia, 'Times New Roman', serif" font-size="26" font-weight="700" fill="white">HRMS</text>
+
+  <!-- Tagline -->
+  <text x="64" y="48" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="600" fill="#A5B4FC" letter-spacing="2">PEOPLE · PERFORMANCE</text>
+</svg>
