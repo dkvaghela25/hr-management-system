@@ -138,7 +138,7 @@ const AddEmployee = () => {
 
                             <button
                                 type="submit"
-                                className="w-full bg-[#1D293D] hover:bg-[#2a3b57] text-white font-bold py-3 rounded-lg transition-colors shadow-md flex items-center justify-center gap-2"
+                                className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-lg transition-colors shadow-md flex items-center justify-center gap-2"
                             >
                                 <FaPlus /> <span>Add Employee</span>
                             </button>

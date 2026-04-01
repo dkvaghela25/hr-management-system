@@ -83,7 +83,7 @@ const FilterInputs = ({ setFilteredUsers }) => {
                 <div className="relative flex-1 bg-white">
                     <div className="relative flex-1">
                         <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-                            <IoIosSearch className={`${filters.name ? "text-(--table-header-bg)" : "text-gray-300"} w-5 h-5 transition-colors`} />
+                            <IoIosSearch className={`${filters.name ? "text-slate-900" : "text-slate-300"} w-5 h-5 transition-colors`} />
                         </div>
 
                         <input

@@ -12,15 +12,12 @@ const Employees = () => {
 
     const navigate = useNavigate();
 
-    console.log(filteredUsers)
-
     return (
         <div className="p-8 w-full max-w-7xl mx-auto flex flex-col gap-8">
             
             <div className="flex justify-between items-center">
                 <div>
                     <h1 className="text-2xl font-bold text-slate-800">Employee Directory</h1>
-                    <p className="text-slate-500 text-sm">Managing team members in {user.department} Department</p>
                 </div>
                 
                 {user?.role === "HR" && (
