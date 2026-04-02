@@ -48,6 +48,10 @@ const App = () => {
               path: '/employees',
               element: <Employees />
             },
+            {
+              path: '/leave_requests',
+              element: <LeaveRequests />
+            },
           ]
         },
         {
@@ -60,10 +64,6 @@ const App = () => {
         {
           element: <ProtectedRoutes role="PROJECT_MANAGER" />,
           children: [
-            {
-              path: '/leave_requests',
-              element: <LeaveRequests />
-            },
             {
               path: '/take_action/:requestId',
               element: <TakeAction />

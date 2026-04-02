@@ -38,7 +38,7 @@ const UserCard = ({ user }) => {
                 </div>
             </div>
 
-            <button onClick={() => setIsUserProfileOpen(true)} className="w-full mt-5 py-2 text-sm font-medium text-slate-700 bg-slate-50 rounded-lg transition-colors">
+            <button onClick={() => setIsUserProfileOpen(true)} className="w-full mt-5 py-2 text-sm font-medium text-slate-700 bg-slate-50 rounded-lg transition-colors hover:bg-indigo-50 hover:text-indigo-600">
                 View Full Profile
             </button>
 

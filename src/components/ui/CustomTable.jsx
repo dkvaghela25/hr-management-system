@@ -76,6 +76,8 @@ const formattedValue = (value, accessor) => {
         return <span className="text-slate-300">--</span>;
     }
 
+    if(accessor === "from" || accessor === "to") return new Date(value).toLocaleDateString();
+
     if (accessor === "status") {
         return (
             <span className={`px-3 py-1 rounded-full text-[11px] font-bold border ${getStatusStyles(value)}`}>

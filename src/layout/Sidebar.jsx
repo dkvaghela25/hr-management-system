@@ -1,23 +1,22 @@
 import { NavLink } from "react-router-dom";
 import { useUserContext } from "../contexts/userContext";
-import { 
-  MdDashboard, 
-  MdPeople, 
-  MdEventNote, 
-  MdLogin, 
+import {
+  MdDashboard,
+  MdPeople,
+  MdEventNote,
+  MdLogin,
   MdListAlt,
-  MdSettings 
+  MdSettings
 } from "react-icons/md";
 
 const Sidebar = () => {
   const { user } = useUserContext();
 
   // Helper for active styling
-  const linkClass = ({ isActive }) => 
-    `flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group ${
-      isActive 
-        ? "bg-indigo-600 text-white shadow-md shadow-indigo-900/20" 
-        : "text-slate-400 hover:bg-slate-800 hover:text-slate-100"
+  const linkClass = ({ isActive }) =>
+    `flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group ${isActive
+      ? "bg-indigo-600 text-white shadow-md shadow-indigo-900/20"
+      : "text-slate-400 hover:bg-slate-800 hover:text-slate-100"
     }`;
 
   return (
@@ -33,7 +32,7 @@ const Sidebar = () => {
           <p className="px-4 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 mb-4">
             Main Menu
           </p>
-          
+
           <div className="space-y-1">
             {!user ? (
               <>
@@ -56,20 +55,23 @@ const Sidebar = () => {
                   <MdPeople size={20} />
                   <span className="font-medium">Employees</span>
                 </NavLink>
-                
-                {/* Role Based Links */}
-                {user?.role === "EMPLOYEE" && (
-                  <NavLink to="/apply_leave" className={linkClass}>
-                    <MdEventNote size={20} />
-                    <span className="font-medium">Apply Leave</span>
-                  </NavLink>
-                )}
-                {user?.role === "PROJECT_MANAGER" && (
+
+                {user?.role !== "HR" && (
                   <NavLink to="/leave_requests" className={linkClass}>
-                    <MdEventNote size={20} />
-                    <span className="font-medium">Leave Requests</span>
+                    <MdListAlt size={20} />
+                    <span className="font-medium">{user?.role === "PROJECT_MANAGER" ? "Leave Requests" : "Your Leave Requests"}</span>
                   </NavLink>
                 )}
+
+                {user?.role === "EMPLOYEE" && (
+                  <>
+                    <NavLink to="/apply_leave" className={linkClass}>
+                      <MdEventNote size={20} />
+                      <span className="font-medium">Apply Leave</span>
+                    </NavLink>
+                  </>
+                )}
+
               </>
             )}
           </div>

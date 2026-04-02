@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { availableRowsPerPage } from "../../constants";
-// import Select from "./Select";
 
-const PaginationBar = ({ filteredRows, setTableRows }) => {
+const PaginationBar = ({ totalRows, setRows }) => {
 
     const [currPage, setCurrPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const pages = Math.ceil(filteredRows.length / rowsPerPage);
+    const pages = Math.ceil(totalRows.length / rowsPerPage);
     const currentPage = pages === 0 ? 1 : Math.min(currPage, pages);
 
     useEffect(() => {
-        if (filteredRows.length < rowsPerPage) {
+        if (totalRows.length < rowsPerPage) {
             // eslint-disable-next-line react-hooks/set-state-in-effect
-            setRowsPerPage(Math.ceil((filteredRows.length + 1) / 5) * 5)
+            setRowsPerPage(Math.ceil((totalRows.length + 1) / 5) * 5)
         }
-    }, [filteredRows, setRowsPerPage, rowsPerPage]);
+    }, [totalRows, rowsPerPage]);
 
     const getPagesArr = () => {
         let arr = Array.from({ length: pages }, (_, index) => index + 1);
@@ -41,8 +40,8 @@ const PaginationBar = ({ filteredRows, setTableRows }) => {
 
     useEffect(() => {
         const sliceStart = (currentPage - 1) * rowsPerPage;
-        setTableRows(filteredRows.slice(sliceStart, sliceStart + rowsPerPage));
-    }, [currentPage, filteredRows, rowsPerPage, setTableRows]);
+        setRows(totalRows.slice(sliceStart, sliceStart + rowsPerPage));
+    }, [currentPage, totalRows, rowsPerPage]);
 
     const gotoPage = (pageNo) => {
         if (pageNo >= 1 && pageNo <= pages) setCurrPage(pageNo);
@@ -50,11 +49,11 @@ const PaginationBar = ({ filteredRows, setTableRows }) => {
 
 
     return (
-        <div className="flex items-center justify-between w-[80%]">
-            <div className="grid grid-cols-2 items-center w-[25%]">
-                <label className="font-semibold text-(--primary-text)" htmlFor="">Rows Per Page : </label>
+        <div className="flex items-center justify-between w-full">
+            <div className="grid grid-cols-2 items-center w-[20%]">
+                <label className="text-sm text-slate-700" htmlFor="">Rows Per Page : </label>
                 <select
-                className="border p-1 rounded-sm"
+                    className="border p-1 rounded-sm bg-white text-sm text-slate-700"
                     name="type"
                     value={rowsPerPage}
                     onChange={(e) => {
@@ -67,7 +66,7 @@ const PaginationBar = ({ filteredRows, setTableRows }) => {
                     ))}
                 </select>
             </div>
-            <div className="flex items-center justify-center py-6">
+            <div className="flex items-center justify-center">
                 <div className="inline-flex -space-x-px rounded-md text-sm shadow-sm bg-white border border-slate-200 overflow-hidden">
                     <button
                         disabled={currentPage === 1}
@@ -86,8 +85,8 @@ const PaginationBar = ({ filteredRows, setTableRows }) => {
                             ${pageNumber === "..."
                                     ? "cursor-default text-(--primary-text)"
                                     : currentPage === pageNumber
-                                        ? "bg-slate-900 text-white"
-                                        : "text-(--primary-text) hover:bg-slate-50"
+                                        ? "bg-indigo-500 text-white"
+                                        : "text-sm text-slate-700 hover:bg-slate-50"
                                 }`}
                         >
                             {pageNumber}

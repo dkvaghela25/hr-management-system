@@ -1,6 +1,6 @@
 const FilterPopUp = ({ accessor, handleChange, value }) => {
     return (
-        <div className="z-10 absolute overflow-visible top-8 -right-5 bg-white p-3 w-80 rounded-sm shadow-sm border border-slate-300">
+        <div className="z-10 absolute top-8 -right-5 bg-white p-3 w-80 rounded-sm shadow-sm border border-slate-300">
             {renderInput(accessor, value, handleChange)}
             <div className="w-3 h-3 absolute rotate-45 bg-white -top-1.5 right-4 border-l border-t border-slate-300"></div>
         </div>
@@ -39,11 +39,18 @@ const renderInput = (accessor, value, handleChange) => {
         );
     }
 
-    if (accessor === "from" || accessor === "to") {
+    if (accessor === "from") {
         return (
-            <div className="grid grid-cols-[0.5fr_2fr] items-center">
-                <label htmlFor="" className="text-slate-900 capitalize">{accessor} : </label>
-                <input type="date" name={accessor} value={value} onChange={handleChange} className="w-full border focus:outline-none p-1 rounded-sm" />
+            <div className="flex flex-col gap-2">
+                <div className="mb-1">Select Date Range</div>
+                <div className="grid grid-cols-[0.8fr_2fr] items-center">
+                    <label htmlFor="" className="text-slate-900 capitalize">Start Date : </label>
+                    <input type="date" name="startDate" value={value.startDate} onChange={handleChange} className="w-full border focus:outline-none p-1 rounded-sm" />
+                </div>
+                <div className="grid grid-cols-[0.8fr_2fr] items-center">
+                    <label htmlFor="" className="text-slate-900 capitalize">End Date : </label>
+                    <input disabled={!value.startDate} min={value.startDate} type="date" name="endDate" value={value.endDate} onChange={handleChange} className="w-full border focus:outline-none p-1 rounded-sm" />
+                </div>
             </div>
         );
     }

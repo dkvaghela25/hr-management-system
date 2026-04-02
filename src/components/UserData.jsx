@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CgProfile } from "react-icons/cg";
 import { IoClose, IoCheckmarkCircle } from "react-icons/io5";
 import { MdContentCopy } from "react-icons/md";
 
@@ -31,8 +32,16 @@ const UserData = ({ userData, setIsOpen, setFormData, userId }) => {
 
                 <div className="bg-[#1D293D] px-6 py-4 flex justify-between items-center">
                     <div className="flex items-center gap-2">
+                        {setFormData 
+                        ? <>
                         <IoCheckmarkCircle className="text-green-400 text-xl" />
                         <h2 className="text-white font-semibold tracking-tight">New User Created Successfully</h2>
+                        </>
+                        : <>
+                        <CgProfile className="text-white text-xl" />
+                        <h2 className="text-white font-semibold tracking-tight">User Profile</h2>
+                        </>
+                        }
                     </div>
                     <button onClick={handleClose} className="text-slate-400 hover:text-white transition-colors">
                         <IoClose size={24} />

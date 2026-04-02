@@ -13,7 +13,7 @@ const Employees = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="p-8 w-full max-w-7xl mx-auto flex flex-col gap-8">
+        <div className="w-full max-w-7xl mx-auto flex flex-col gap-8">
             
             <div className="flex justify-between items-center">
                 <div>
