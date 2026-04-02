@@ -1,8 +1,32 @@
-const FilterPopUp = ({ accessor, handleChange, value }) => {
+import { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
+
+const FilterPopUp = ({ accessor, handleChange, value, iconRef }) => {
+    const [style, setStyle] = useState({ position: "fixed", zIndex: 9999, opacity: 0 });
+
+    useEffect(() => {
+
+        if (!iconRef?.current) return;
+
+        const rect = iconRef.current.getBoundingClientRect();
+
+        setStyle({
+            position: "fixed",
+            top: rect.bottom + 15,
+            left: rect.left - 290,
+            zIndex: 9999,
+            opacity: 1
+        });
+
+    }, []);
+
     return (
-        <div className="z-10 absolute overflow-visible top-8 -right-5 bg-white p-3 w-80 rounded-sm shadow-sm border border-slate-300">
+        <div
+            style={style}
+            className="bg-white p-3 w-80 rounded-sm shadow-lg border border-slate-300 transition-opacity duration-300 ease-in-out"
+        >
             {renderInput(accessor, value, handleChange)}
-            <div className="w-3 h-3 absolute rotate-45 bg-white -top-1.5 right-4 border-l border-t border-slate-300"></div>
+            <div className="w-3 h-3 absolute rotate-45 bg-white -top-1.5 right-4 border-l border-t border-slate-300" />
         </div>
     );
 };
