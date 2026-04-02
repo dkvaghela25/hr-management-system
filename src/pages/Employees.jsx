@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/userContext";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import UserCard from "../components/UserCard";
-import FilterInputs from "../components/FilterInputs";
 import { useState } from "react";
+import EmployeesFilterInputs from "../components/Filters/EmployeesFilterInputs";
 
 const Employees = () => {
     const { user, users } = useUserContext();
@@ -30,7 +30,7 @@ const Employees = () => {
                 )}
             </div>
 
-            <FilterInputs setFilteredUsers={setFilteredUsers} />
+            <EmployeesFilterInputs setFilteredUsers={setFilteredUsers} />
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredUsers.map(user => (

@@ -7,3 +7,6 @@ export const randomMiddleName = ["Rajeshbhai", "Sureshbhai", "Rameshbhai", "Dine
 export const randomLastName = ["Sharma", "Patel", "Verma", "Gupta", "Reddy", "Iyer", "Khan", "Malhotra", "Joshi", "Das"]
 
 export const availableRowsPerPage = [5, 10, 15, 20, 25]
+
+
+export const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

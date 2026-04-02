@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import { IoIosSearch, IoMdCloseCircle } from "react-icons/io";
 import { MdFilterList, MdRotateLeft } from "react-icons/md";
-import { departments } from "../constants";
-import { useUserContext } from "../contexts/userContext";
+import { departments, escapeRegExp } from "../../constants";
+import { useUserContext } from "../../contexts/userContext";
 
-const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-
-const FilterInputs = ({ setFilteredUsers }) => {
+const EmployeesFilterInputs = ({ setFilteredUsers }) => {
 
     const { user, users } = useUserContext();
 
@@ -45,6 +43,7 @@ const FilterInputs = ({ setFilteredUsers }) => {
         }, 400);
 
         return () => clearTimeout(handler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filters]);
 
     const clearFilters = () => {
@@ -120,4 +119,4 @@ const FilterInputs = ({ setFilteredUsers }) => {
     );
 };
 
-export default FilterInputs;
+export default EmployeesFilterInputs;

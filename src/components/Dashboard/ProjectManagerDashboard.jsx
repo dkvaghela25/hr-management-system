@@ -34,11 +34,11 @@ const ProjectManagerDashboard = () => {
     return (
         <>
             <div className={`flex flex-col items-center gap-5 w-full min-w-0`}>
-                <h1 className="font-extrabold text-3xl underline">Pending Leave Requests</h1>
-                <div className={`bg-white p-6 rounded-xl shadow-sm w-full max-w-full min-w-0 overflow-hidden`}>
-                    <div className="w-full overflow-x-auto">
-                        <CustomTable rows={rows} columns={columns} />
-                    </div>
+                <div className="mr-auto">
+                    <h1 className="text-2xl font-bold text-slate-800"> Pending Leave Requests</h1>
+                </div>
+                <div className="w-full overflow-x-auto">
+                    <CustomTable rows={rows} columns={columns} />
                 </div>
             </div>
         </>

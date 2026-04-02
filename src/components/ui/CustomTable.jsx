@@ -1,17 +1,32 @@
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { FaFilter } from "react-icons/fa";
+import FilterPopUp from "../Filters/FilterPopUp";
 
 const CustomTable = ({ rows, columns }) => {
+
+    const [displayId, setDisplayId] = useState(false);
+    const handleToggle = (index) => {
+        setDisplayId(prev => prev === index ? false : index)
+    }
+
     return (
         <div className="w-full overflow-x-auto rounded-xl border border-slate-200 shadow-sm bg-white">
             <table className="w-full text-left border-collapse">
                 <thead>
                     <tr className="bg-slate-50/80 border-b border-slate-200">
-                        {columns.map(col => (
-                            <th 
-                                className="py-4 px-4 text-[11px] font-bold uppercase tracking-widest text-slate-500" 
+                        {columns.map((col, index) => (
+                            <th
+                                className="py-4 px-4 text-[11px] font-bold uppercase tracking-widest text-slate-500"
                                 key={col.accessor}
                             >
-                                {col.Header}
+                                <div className="relative flex items-center justify-between w-full">
+                                    <span>{col.Header}</span>
+                                    {col.filterBy && <div className="relative">
+                                        <FaFilter onClick={() => handleToggle(index)} className="cursor-pointer" />
+                                        {displayId === index && <FilterPopUp accessor={col.accessor} value={col.filterInputValue} handleChange={col.handleChange} />}
+                                    </div>}
+                                </div>
                             </th>
                         ))}
                     </tr>
@@ -27,8 +42,8 @@ const CustomTable = ({ rows, columns }) => {
                         rows.map((row) => (
                             <tr key={row.id} className="hover:bg-slate-50/50 transition-colors group">
                                 {columns.map(col => (
-                                    <td 
-                                        key={col.accessor} 
+                                    <td
+                                        key={col.accessor}
                                         className="py-4 px-4 text-sm text-slate-700 whitespace-nowrap"
                                     >
                                         {formattedValue(row[col.accessor], col.accessor)}
@@ -39,21 +54,20 @@ const CustomTable = ({ rows, columns }) => {
                     )}
                 </tbody>
             </table>
-        </div>
+        </div >
     );
 };
 
 const formattedValue = (value, accessor) => {
-    // Styling for Status Badges
     const getStatusStyles = (status) => {
         switch (status) {
-            case "APPROVED": 
+            case "APPROVED":
                 return "bg-emerald-100 text-emerald-700 border-emerald-200";
-            case "PENDING": 
+            case "PENDING":
                 return "bg-amber-100 text-amber-700 border-amber-200";
-            case "REJECTED": 
+            case "REJECTED":
                 return "bg-rose-100 text-rose-700 border-rose-200";
-            default: 
+            default:
                 return "bg-slate-100 text-slate-700 border-slate-200";
         }
     };
@@ -80,7 +94,6 @@ const formattedValue = (value, accessor) => {
         );
     }
 
-    // Special styling for IDs or numeric values
     if (accessor === "id" || accessor === "employeeId") {
         return <span className="font-mono text-slate-400 text-xs">#{value}</span>;
     }
