@@ -23,7 +23,7 @@ const CustomTable = ({ rows, columns }) => {
                             >
                                 <div className="relative flex items-center justify-between w-full">
                                     <span>{col.Header}</span>
-                                    {col.filterBy && <FilterIcon index={index} col={col} displayId={displayId} handleToggle={handleToggle} />}
+                                    {col.filterBy && <FilterIcon index={index} rows={rows} col={col} displayId={displayId} handleToggle={handleToggle} />}
                                 </div>
                             </th>
                         ))}

@@ -2,8 +2,7 @@ import { useRef } from "react";
 import { FaFilter } from "react-icons/fa";
 import FilterPopUp from "./FilterPopUp";
 
-// Inside your columns .map(), replace the filter icon section:
-const FilterIcon = ({ index, col, displayId, handleToggle }) => {
+const FilterIcon = ({ index, col, displayId, handleToggle, rows }) => {
 
     const iconRef = useRef(null);
 
@@ -16,6 +15,7 @@ const FilterIcon = ({ index, col, displayId, handleToggle }) => {
             />
             {displayId === index && (
                 <FilterPopUp
+                    rows={rows}
                     accessor={col.accessor}
                     value={col.filterInputValue}
                     handleChange={col.handleChange}

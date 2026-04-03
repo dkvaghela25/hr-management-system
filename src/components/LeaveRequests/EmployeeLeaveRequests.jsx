@@ -4,13 +4,14 @@ import { escapeRegExp } from "../../constants";
 import CustomTable from "../ui/CustomTable";
 import PaginationBar from "../ui/PaginationBar";
 import { NavLink } from "react-router-dom";
-import { MdEventNote } from "react-icons/md";
+import { MdEventNote, MdRotateLeft } from "react-icons/md";
 
 const EmployeeLeaveRequests = () => {
 
     const { user, leaveRequests } = useUserContext();
 
-    const [filters, setFilters] = useState({
+    const initialFiltersValue = {
+        id: "",
         dateRange: {
             startDate: "",
             endDate: ""
@@ -22,7 +23,8 @@ const EmployeeLeaveRequests = () => {
         leaveType: "",
         note: "",
         status: "",
-    })
+    }
+    const [filters, setFilters] = useState(initialFiltersValue)
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -39,14 +41,15 @@ const EmployeeLeaveRequests = () => {
     useEffect(() => {
 
         const handler = setTimeout(() => {
-            const { dateRange: { startDate, endDate }, days: { minDays, maxDays }, leaveType, note, status } = filters;
+            const { id, dateRange: { startDate, endDate }, days: { minDays, maxDays }, leaveType, note, status } = filters;
 
-            if (!startDate && !endDate && !minDays && !maxDays && !leaveType && !note && !status) return setFilteredRequests(initialData);
+            if (!id && !startDate && !endDate && !minDays && !maxDays && !leaveType && !note && !status) return setFilteredRequests(initialData);
 
             const noteRegex = new RegExp(escapeRegExp(note), "i");
 
             const newFilteredRequests = initialData.filter((currRequest) => {
 
+                const matchesId = id ? currRequest.id == id : true;
                 const matchesNote = noteRegex.test(String(currRequest.note ?? ""));
 
                 const matchesRange = (startDate && endDate)
@@ -58,7 +61,7 @@ const EmployeeLeaveRequests = () => {
                 const matchesLeaveType = leaveType !== "" ? currRequest.leaveType === leaveType : true;
                 const matchesStatus = status !== "" ? currRequest.status === status : true;
 
-                return matchesNote && matchesRange && matchesMinDays && matchesMaxDays && matchesLeaveType && matchesStatus;
+                return matchesId && matchesNote && matchesRange && matchesMinDays && matchesMaxDays && matchesLeaveType && matchesStatus;
             });
 
             setFilteredRequests(newFilteredRequests);
@@ -68,7 +71,14 @@ const EmployeeLeaveRequests = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filters]);
 
+    useEffect(() => {
+        if (filteredRequests.length === 0) {
+            setRows([]);
+        }
+    }, [filteredRequests]);
+
     const columns = [
+        { Header: "Id", accessor: "id", filterBy: true, filterInputValue: filters.id, handleChange },
         { Header: "From", accessor: "from", filterBy: true, filterInputValue: filters.dateRange, handleChange },
         { Header: "To", accessor: "to" },
         { Header: "Days", accessor: "days", filterBy: true, filterInputValue: filters.days, handleChange },
@@ -76,6 +86,10 @@ const EmployeeLeaveRequests = () => {
         { Header: "Note", accessor: "note", filterBy: true, filterInputValue: filters.note, handleChange },
         { Header: "Status", accessor: "status", filterBy: true, filterInputValue: filters.status, handleChange },
     ]
+
+    const clearFilters = () => {
+        setFilters(initialFiltersValue)
+    }
 
     return (
         <>
@@ -85,13 +99,18 @@ const EmployeeLeaveRequests = () => {
                         <h1 className="text-2xl font-bold text-slate-800">Your Leave Requests</h1>
                         <p className="text-slate-500 text-sm">Monitor your leave approvals, rejections, and pending requests in real-time.</p>
                     </div>
-                    <NavLink to="/apply_leave">
+
+                    {filteredRequests.length !== initialData.length && (
                         <button
-                            className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 flex gap-2 items-center rounded-lg transition-all shadow-sm font-medium"
+                            type="button"
+                            onClick={clearFilters}
+                            className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-slate-600 bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 active:scale-95 transition-all"
                         >
-                            <MdEventNote size={18} /> <span>Apply For Leave</span>
+                            <MdRotateLeft className="text-lg" />
+                            <span>Reset Filters</span>
                         </button>
-                    </NavLink>
+                    )}
+
                 </div>
                 <div className="w-full overflow-x-auto">
                     <CustomTable rows={rows} columns={columns} />

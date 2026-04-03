@@ -1,29 +1,42 @@
 import { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
 
-const FilterPopUp = ({ accessor, handleChange, value, iconRef }) => {
+const FilterPopUp = ({ accessor, handleChange, value, iconRef, rows }) => {
     const [style, setStyle] = useState({ position: "fixed", zIndex: 9999, opacity: 0 });
+    const [rect, setRect] = useState({});
+
+    useEffect(() => {
+        setRect(iconRef.current.getBoundingClientRect())
+    }, [rows])
 
     useEffect(() => {
 
-        if (!iconRef?.current) return;
+        const handleResize = () => {
+            if (!iconRef?.current) return;
+            setRect(iconRef.current.getBoundingClientRect())
+        };
 
-        const rect = iconRef.current.getBoundingClientRect();
+        window.addEventListener('resize', handleResize);
 
+        return window.removeEventListener('resize', handleResize);
+
+    }, []);
+
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setStyle({
             position: "fixed",
             top: rect.bottom + 15,
-            left: rect.left - 290,
+            left: rect.left - (accessor === "id" ? 130 : 290),
             zIndex: 9999,
             opacity: 1
         });
+    }, [rect])
 
-    }, []);
 
     return (
         <div
             style={style}
-            className="bg-white p-3 w-80 rounded-sm shadow-lg border border-slate-300 transition-opacity duration-300 ease-in-out"
+            className={`bg-white p-3 ${accessor === "id" ? "w-40" : "w-80"} rounded-sm shadow-lg border border-slate-300 transition-opacity duration-300 ease-in-out`}
         >
             {renderInput(accessor, value, handleChange)}
             <div className="w-3 h-3 absolute rotate-45 bg-white -top-1.5 right-4 border-l border-t border-slate-300" />
@@ -75,6 +88,15 @@ const renderInput = (accessor, value, handleChange) => {
                     <label htmlFor="" className="text-slate-900 capitalize">End Date : </label>
                     <input disabled={!value.startDate} min={value.startDate} type="date" name="endDate" value={value.endDate} onChange={handleChange} className="w-full border focus:outline-none p-1 rounded-sm" />
                 </div>
+            </div>
+        );
+    }
+
+    if (accessor === "id") {
+        return (
+            <div className="grid grid-cols-[0.8fr_2fr] items-center">
+                <label htmlFor="" className="text-slate-900 capitalize">ID : </label>
+                <input type="number" name="id" value={value} onChange={handleChange} className="w-full border focus:outline-none p-1 rounded-sm" />
             </div>
         );
     }

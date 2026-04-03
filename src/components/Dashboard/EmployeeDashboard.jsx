@@ -8,7 +8,15 @@ const EmployeeDashboard = () => {
     const { user, leaveRequests } = useUserContext();
 
     const rows = leaveRequests.filter((request) => request.employeeId === user.id).slice(0, 5);
-    const columns = Object.keys(leaveRequests[0]).map((key) => ({ Header: key.toLocaleUpperCase(), accessor: key }))
+    const columns = [
+        { Header: "Id", accessor: "id" },
+        { Header: "From", accessor: "from" },
+        { Header: "To", accessor: "to" },
+        { Header: "Days", accessor: "days" },
+        { Header: "Leave Type", accessor: "leaveType" },
+        { Header: "Note", accessor: "note" },
+        { Header: "Status", accessor: "status" },
+    ]
 
     return (
         <>

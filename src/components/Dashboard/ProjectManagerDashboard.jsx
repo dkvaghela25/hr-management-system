@@ -23,6 +23,7 @@ const ProjectManagerDashboard = () => {
     ))
 
     const columns = [
+        { Header: "Id", accessor: "id" },
         { Header: "Employee Name", accessor: "employeeName" },
         { Header: "From", accessor: "from" },
         { Header: "To", accessor: "to" },

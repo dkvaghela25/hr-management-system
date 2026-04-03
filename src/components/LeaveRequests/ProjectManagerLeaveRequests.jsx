@@ -4,12 +4,14 @@ import { useUserContext } from "../../contexts/userContext";
 import { escapeRegExp } from "../../constants";
 import CustomTable from "../ui/CustomTable";
 import PaginationBar from "../ui/PaginationBar";
+import { MdRotateLeft } from "react-icons/md";
 
 const ProjectManagerLeaveRequests = () => {
 
   const { users, user, leaveRequests } = useUserContext();
 
-  const [filters, setFilters] = useState({
+  const initialFiltersValue = {
+    id: "",
     employeeName: "",
     dateRange: {
       startDate: "",
@@ -22,7 +24,9 @@ const ProjectManagerLeaveRequests = () => {
     leaveType: "",
     note: "",
     status: "",
-  })
+  }
+
+  const [filters, setFilters] = useState(initialFiltersValue)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,15 +57,16 @@ const ProjectManagerLeaveRequests = () => {
   useEffect(() => {
 
     const handler = setTimeout(() => {
-      const { employeeName, dateRange: { startDate, endDate }, days: { minDays, maxDays }, leaveType, note, status } = filters;
+      const { id, employeeName, dateRange: { startDate, endDate }, days: { minDays, maxDays }, leaveType, note, status } = filters;
 
-      if (!employeeName && !startDate && !endDate && !minDays && !maxDays && !leaveType && !note && !status) return setFilteredRequests(initialData);
+      if (!id && !employeeName && !startDate && !endDate && !minDays && !maxDays && !leaveType && !note && !status) return setFilteredRequests(initialData);
 
       const employeeNameRegex = new RegExp(escapeRegExp(employeeName), "i");
       const noteRegex = new RegExp(escapeRegExp(note), "i");
 
       const newFilteredRequests = initialData.filter((currRequest) => {
 
+        const matchesId = id ? currRequest.id == id : true;
         const matchesEmployeeName = employeeNameRegex.test(String(currRequest.employeeName ?? ""));
         const matchesNote = noteRegex.test(String(currRequest.note ?? ""));
 
@@ -74,7 +79,7 @@ const ProjectManagerLeaveRequests = () => {
         const matchesLeaveType = leaveType !== "" ? currRequest.leaveType === leaveType : true;
         const matchesStatus = status !== "" ? currRequest.status === status : true;
 
-        return matchesEmployeeName && matchesNote && matchesRange && matchesMinDays && matchesMaxDays && matchesLeaveType && matchesStatus;
+        return matchesId & matchesEmployeeName && matchesNote && matchesRange && matchesMinDays && matchesMaxDays && matchesLeaveType && matchesStatus;
       });
 
       setFilteredRequests(newFilteredRequests);
@@ -84,7 +89,14 @@ const ProjectManagerLeaveRequests = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
+  useEffect(() => {
+    if (filteredRequests.length === 0) {
+      setRows([]);
+    }
+  }, [filteredRequests]);
+
   const columns = [
+    { Header: "Id", accessor: "id", filterBy: true, filterInputValue: filters.id, handleChange },
     { Header: "Employee Name", accessor: "employeeName", filterBy: true, filterInputValue: filters.employeeName, handleChange },
     { Header: "From", accessor: "from", filterBy: true, filterInputValue: filters.dateRange, handleChange },
     { Header: "To", accessor: "to" },
@@ -95,20 +107,39 @@ const ProjectManagerLeaveRequests = () => {
     { Header: "Action", accessor: "action" },
   ]
 
+  const clearFilters = () => {
+    setFilters(initialFiltersValue)
+  }
+
   return (
     <>
       <div className={`flex flex-col items-center gap-5 w-full min-w-0`}>
-        <div className="w-full  border-b border-slate-300 pb-5">
-          <h1 className="text-2xl font-bold text-slate-800">Leave Requests</h1>
-          <p className="text-sm text-slate-500">View details of all current leave requests that require immediate attention.</p>
+        <div className="flex w-full justify-between items-center pb-3 border-b border-slate-300">
+          <div>
+            <h1 className="text-2xl font-bold text-slate-800">Leave Requests</h1>
+            <p className="text-sm text-slate-500">View details of all current leave requests that require immediate attention.</p>
+          </div>
+
+          {filteredRequests.length !== initialData.length && (
+            <button
+              type="button"
+              onClick={clearFilters}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-slate-600 bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 active:scale-95 transition-all"
+            >
+              <MdRotateLeft className="text-lg" />
+              <span>Reset Filters</span>
+            </button>
+          )}
+
         </div>
         <div className="w-full overflow-x-auto">
           <CustomTable rows={rows} columns={columns} />
         </div>
-        { filteredRequests.length !== 0 && <PaginationBar totalRows={filteredRequests} setRows={setRows} />}
+        {filteredRequests.length !== 0 && <PaginationBar totalRows={filteredRequests} setRows={setRows} />}
       </div>
     </>
   );
 };
 
 export default ProjectManagerLeaveRequests;
+
