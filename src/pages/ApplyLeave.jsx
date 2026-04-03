@@ -86,14 +86,14 @@ const ApplyLeave = () => {
     return (
         <>
             <div className="w-full h-full flex items-center justify-center p-4">
-                <div className="w-[50%] bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+                <div className="w-[45%] bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
                     <div className="p-8">
                         <div className="text-center mb-8">
                             <h1 className="text-3xl font-bold text-gray-800">Apply Leave</h1>
                             <p className="text-gray-500 mt-2">Submit your leave request details</p>
                         </div>
 
-                        <form className="space-y-6" onSubmit={applyLeave}>
+                        <form className="space-y-6 text-sm" onSubmit={applyLeave}>
                             <div className="w-full flex justify-between gap-4">
                                 <div className="flex flex-col gap-1 w-[40%]">
                                     <label htmlFor="from" className="block text-sm font-semibold text-gray-700 mb-1">
@@ -101,7 +101,7 @@ const ApplyLeave = () => {
                                     </label>
                                     <input
                                         name="from"
-                                        className={`w-full px-4 py-3 rounded-lg border border-gray-300 outline-none transition-all ${errors.from ? "border-red-500" : ""}`}
+                                        className={`w-full px-4 py-2 rounded-lg border border-gray-300 outline-none transition-all ${errors.from ? "border-red-500" : ""}`}
                                         type="date"
                                         value={formData.from}
                                         onChange={handleChange}
@@ -116,7 +116,7 @@ const ApplyLeave = () => {
                                     <input
                                         disabled
                                         name="days"
-                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-50"
+                                        className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-gray-50"
                                         type="text"
                                         value={formData.days}
                                     />
@@ -129,7 +129,7 @@ const ApplyLeave = () => {
                                     <input
                                         disabled={!formData.from}
                                         name="to"
-                                        className={`w-full px-4 py-3 rounded-lg border border-gray-300 outline-none transition-all ${errors.to ? "border-red-500" : ""}`}
+                                        className={`w-full px-4 py-2 rounded-lg border border-gray-300 outline-none transition-all ${errors.to ? "border-red-500" : ""}`}
                                         type="date"
                                         value={formData.to}
                                         onChange={handleChange}
@@ -146,7 +146,7 @@ const ApplyLeave = () => {
                                 </label>
                                 <select
                                     name="leaveType"
-                                    className={`w-full px-4 py-3 rounded-lg border border-gray-300 outline-none transition-all ${formData.leaveType === "" ? "text-slate-500" : ""} ${errors.leaveType ? "border-red-500" : ""}`}
+                                    className={`w-full px-4 py-2 rounded-lg border border-gray-300 outline-none transition-all ${formData.leaveType === "" ? "text-slate-500" : ""} ${errors.leaveType ? "border-red-500" : ""}`}
                                     value={formData.leaveType}
                                     onChange={handleChange}
                                 >
@@ -165,7 +165,7 @@ const ApplyLeave = () => {
                                 </label>
                                 <textarea
                                     name="note"
-                                    className={`w-full px-4 py-3 rounded-lg border border-gray-300 outline-none transition-all ${errors.note ? "border-red-500" : ""}`}
+                                    className={`w-full px-4 py-2 rounded-lg border border-gray-300 outline-none transition-all ${errors.note ? "border-red-500" : ""}`}
                                     value={formData.note}
                                     onChange={handleChange}
                                     placeholder="Write your leave reason"

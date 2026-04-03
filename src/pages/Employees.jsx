@@ -15,7 +15,7 @@ const Employees = () => {
     return (
         <div className="w-full max-w-7xl mx-auto flex flex-col gap-8">
             
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center border-b pb-5 border-slate-300">
                 <div>
                     <h1 className="text-2xl font-bold text-slate-800">Employee Directory</h1>
                 </div>

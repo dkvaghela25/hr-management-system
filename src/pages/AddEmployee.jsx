@@ -68,21 +68,21 @@ const AddEmployee = () => {
     return (
         <>
             <div className="w-full h-full flex items-center justify-center p-4">
-                <div className="w-[50%] bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+                <div className="w-[45%] bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
                     <div className="p-8">
                         <div className="text-center mb-8">
                             <h1 className="text-3xl font-bold text-gray-800">Add New Employee</h1>
                             <p className="text-gray-500 mt-2">Fill in employee details to create account</p>
                         </div>
 
-                        <form className="space-y-6" onSubmit={addEmployee}>
+                        <form className="text-sm space-y-6" onSubmit={addEmployee}>
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                                     Employee Name <span className="text-red-500">*</span>
                                 </label>
                                 <input
                                     name="name"
-                                    className={`w-full px-4 py-3 rounded-lg border border-gray-300 outline-none transition-all ${errors.name ? "border-red-500" : ""}`}
+                                    className={`w-full px-4 py-2 rounded-lg border border-gray-300 outline-none transition-all ${errors.name ? "border-red-500" : ""}`}
                                     type="text"
                                     placeholder="Enter employee name"
                                     value={formData.name}
@@ -97,7 +97,7 @@ const AddEmployee = () => {
                                 </label>
                                 <select
                                     name="role"
-                                    className={`w-full px-4 py-3 rounded-lg border border-gray-300 outline-none transition-all ${formData.role === "" ? "text-slate-500" : ""} ${errors.role ? "border-red-500" : ""}`}
+                                    className={`w-full px-4 py-2 rounded-lg border border-gray-300 outline-none transition-all ${formData.role === "" ? "text-slate-500" : ""} ${errors.role ? "border-red-500" : ""}`}
                                     value={formData.role}
                                     onChange={handleChange}
                                 >
@@ -116,7 +116,7 @@ const AddEmployee = () => {
                                 <select
                                     name="department"
                                     disabled={!formData.role}
-                                    className={`w-full px-4 py-3 rounded-lg border border-gray-300 outline-none transition-all disabled:bg-gray-50 disabled:text-slate-400 ${formData.department === "" ? "text-slate-500" : ""} ${errors.department ? "border-red-500" : ""}`}
+                                    className={`w-full px-4 py-2 rounded-lg border border-gray-300 outline-none transition-all disabled:bg-gray-50 disabled:text-slate-400 ${formData.department === "" ? "text-slate-500" : ""} ${errors.department ? "border-red-500" : ""}`}
                                     value={formData.department}
                                     onChange={handleChange}
                                 >

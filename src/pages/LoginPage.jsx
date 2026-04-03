@@ -71,7 +71,7 @@ const LoginPage = () => {
   return (
     <>
       <div className="w-full h-full flex items-center justify-center p-4">
-        <div className="w-[50%] bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+        <div className="w-[45%] bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
 
           <div className="p-8">
             <div className="text-center mb-8">
@@ -79,7 +79,7 @@ const LoginPage = () => {
               <p className="text-gray-500 mt-2">Please enter your details to login</p>
             </div>
 
-            <form className="space-y-6">
+            <form className="text-sm space-y-6">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Username <span className="text-red-500">*</span>
@@ -88,7 +88,7 @@ const LoginPage = () => {
                   type="text"
                   name="username"
                   placeholder="Enter your username"
-                  className={`w-full px-4 py-3 rounded-lg border border-gray-300 outline-none transition-all ${errors.username ? "border-red-500" : ""}`}
+                  className={`w-full px-4 py-2 rounded-lg border border-gray-300 outline-none transition-all ${errors.username ? "border-red-500" : ""}`}
                   value={formData.username}
                   onChange={handleChange}
                   required
@@ -105,14 +105,14 @@ const LoginPage = () => {
                   type={showPassword ? "text" : "password"}
                   name="password"
                   placeholder="••••••••"
-                  className={`w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#1D293D] focus:border-transparent outline-none transition-all ${errors.password ? "border-red-500" : ""}`}
+                  className={`w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#1D293D] focus:border-transparent outline-none transition-all ${errors.password ? "border-red-500" : ""}`}
                   value={formData.password}
                   onChange={handleChange}
                   required
                 />
                 {errors.password && (<div className="text-red-500 text-sm mt-1">* {errors.password}</div>)}
 
-                <button type="button" className="absolute bottom-3 right-3 text-2xl text-gray-700" onClick={() => setShowPassword(prev => !prev)}>
+                <button type="button" className="absolute bottom-2 right-3 text-xl text-gray-700" onClick={() => setShowPassword(prev => !prev)}>
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
