@@ -39,8 +39,10 @@ const AddEmployee = () => {
         e.preventDefault();
 
         const { name, role, department } = formData;
+        const nameRegex = /^[A-Z][a-z]+\s[A-Z][a-z]+\s[A-Z][a-z]+$/
 
         if (!name) return setErrors((prev) => ({ ...prev, name: "Employee name is required" }));
+        if (!nameRegex.test(name)) return setErrors((prev) => ({ ...prev, name: "Name should be in Firstname Middlename Lastname Format" }));
         if (!role) return setErrors((prev) => ({ ...prev, role: "Role is required" }));
         if (!department) return setErrors((prev) => ({ ...prev, department: "Department is required" }));
 
@@ -84,7 +86,7 @@ const AddEmployee = () => {
                                     name="name"
                                     className={`w-full px-4 py-2 rounded-lg border border-gray-300 outline-none transition-all ${errors.name ? "border-red-500" : ""}`}
                                     type="text"
-                                    placeholder="Enter employee name"
+                                    placeholder="e.g.  John Alan Smith"
                                     value={formData.name}
                                     onChange={handleChange}
                                 />

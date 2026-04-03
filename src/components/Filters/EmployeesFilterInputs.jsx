@@ -57,16 +57,17 @@ const EmployeesFilterInputs = ({ setFilteredUsers }) => {
             </div>
 
             <div className="flex flex-1 items-center bg-slate-50 border border-slate-200 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-indigo-500/20 focus-within:border-indigo-500 transition-all">
-                
+
                 <div className="relative w-1/2 border-r border-slate-200">
                     <select
+                        multiple
+                        size={1}
                         id="department"
                         className="w-full bg-transparent py-2.5 pl-3 pr-8 text-sm font-medium text-slate-700 appearance-none focus:outline-none cursor-pointer"
                         name="department"
                         value={filters.department}
                         onChange={handleChange}
                     >
-                        <option value="">All Departments</option>
                         <option value="Human Resources">Human Resources</option>
                         {departments.map(rows => (
                             <option key={rows} value={rows}>{rows}</option>
