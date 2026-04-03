@@ -98,13 +98,14 @@ const ProjectManagerLeaveRequests = () => {
   return (
     <>
       <div className={`flex flex-col items-center gap-5 w-full min-w-0`}>
-        <div className="mr-auto">
+        <div className="w-full  border-b border-slate-300 pb-5">
           <h1 className="text-2xl font-bold text-slate-800">Leave Requests</h1>
+          <p className="text-sm text-slate-500">View details of all current leave requests that require immediate attention.</p>
         </div>
         <div className="w-full overflow-x-auto">
           <CustomTable rows={rows} columns={columns} />
         </div>
-        <PaginationBar totalRows={filteredRequests} setRows={setRows} />
+        { filteredRequests.length !== 0 && <PaginationBar totalRows={filteredRequests} setRows={setRows} />}
       </div>
     </>
   );

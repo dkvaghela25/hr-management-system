@@ -3,6 +3,8 @@ import { useUserContext } from "../../contexts/userContext";
 import { escapeRegExp } from "../../constants";
 import CustomTable from "../ui/CustomTable";
 import PaginationBar from "../ui/PaginationBar";
+import { NavLink } from "react-router-dom";
+import { MdEventNote } from "react-icons/md";
 
 const EmployeeLeaveRequests = () => {
 
@@ -78,13 +80,23 @@ const EmployeeLeaveRequests = () => {
     return (
         <>
             <div className={`flex flex-col items-center gap-5 w-full min-w-0`}>
-                <div className="mr-auto">
-                    <h1 className="text-2xl font-bold text-slate-800">Your Leave Requests</h1>
+                <div className="flex w-full justify-between items-center pb-3 border-b border-slate-300">
+                    <div>
+                        <h1 className="text-2xl font-bold text-slate-800">Your Leave Requests</h1>
+                        <p className="text-slate-500 text-sm">Monitor your leave approvals, rejections, and pending requests in real-time.</p>
+                    </div>
+                    <NavLink to="/apply_leave">
+                        <button
+                            className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 flex gap-2 items-center rounded-lg transition-all shadow-sm font-medium"
+                        >
+                            <MdEventNote size={18} /> <span>Apply For Leave</span>
+                        </button>
+                    </NavLink>
                 </div>
                 <div className="w-full overflow-x-auto">
                     <CustomTable rows={rows} columns={columns} />
                 </div>
-                <PaginationBar totalRows={filteredRequests} setRows={setRows} />
+                {filteredRequests.length !== 0 && <PaginationBar totalRows={filteredRequests} setRows={setRows} />}
             </div>
         </>
     );

@@ -71,7 +71,7 @@ const TakeAction = () => {
                         <button
                             type="button"
                             onClick={() => navigate("/leave_requests")}
-                            className="mt-6 bg-[#1D293D] hover:bg-[#2a3b57] text-white font-bold py-3 px-6 rounded-lg transition-colors shadow-md"
+                            className="mt-6 bg-[#1D293D] hover:bg-[#2a3b57] text-white font-bold py-2 px-6 rounded-lg transition-colors shadow-md"
                         >
                             Back to Leave Requests
                         </button>
@@ -84,42 +84,42 @@ const TakeAction = () => {
     return (
         <>
             <div className="w-full h-full flex items-center justify-center p-4">
-                <div className="w-[50%] bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+                <div className="w-[45%] bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
                     <div className="p-8">
                         <div className="text-center mb-8">
                             <h1 className="text-3xl font-bold text-gray-800">Take Action</h1>
                             <p className="text-gray-500 mt-2">Review leave details and update request status</p>
                         </div>
 
-                        <form className="space-y-6" onSubmit={takeAction}>
+                        <form className="space-y-6 text-sm" onSubmit={takeAction}>
                             <div className="flex flex-col gap-1">
                                 <label className="block text-sm font-semibold text-gray-700 mb-1">Employee Name</label>
-                                <div className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-50">{employee.name}</div>
+                                <div className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-gray-50">{employee.name}</div>
                             </div>
 
                             <div className="w-full flex justify-between gap-4">
                                 <div className="flex flex-col gap-1 w-[40%]">
                                     <label className="block text-sm font-semibold text-gray-700 mb-1">From</label>
-                                    <div className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-50">{request.from}</div>
+                                    <div className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-gray-50">{request.from}</div>
                                 </div>
                                 <div className="flex flex-col gap-1 w-[15%]">
                                     <label className="block text-sm font-semibold text-gray-700 mb-1">Days</label>
-                                    <div className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-50">{request.days}</div>
+                                    <div className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-gray-50">{request.days}</div>
                                 </div>
                                 <div className="flex flex-col gap-1 w-[40%]">
                                     <label className="block text-sm font-semibold text-gray-700 mb-1">To</label>
-                                    <div className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-50">{request.to}</div>
+                                    <div className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-gray-50">{request.to}</div>
                                 </div>
                             </div>
 
                             <div className="flex flex-col gap-1">
                                 <label className="block text-sm font-semibold text-gray-700 mb-1">Leave Type</label>
-                                <div className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-50">{request.leaveType}</div>
+                                <div className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-gray-50">{request.leaveType}</div>
                             </div>
 
                             <div className="flex flex-col gap-1">
                                 <label className="block text-sm font-semibold text-gray-700 mb-1">Note</label>
-                                <div className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-50">{request.note}</div>
+                                <div className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-gray-50">{request.note}</div>
                             </div>
 
                             <hr className="border border-gray-200" />
@@ -131,7 +131,7 @@ const TakeAction = () => {
                                 <select
                                     required
                                     name="action"
-                                    className={`w-full px-4 py-3 rounded-lg border border-gray-300 outline-none transition-all ${errors.action ? "border-red-500" : ""}`}
+                                    className={`w-full px-4 py-2 rounded-lg border border-gray-300 outline-none transition-all ${errors.action ? "border-red-500" : ""}`}
                                     value={formData.action}
                                     onChange={handleChange}
                                 >
@@ -149,7 +149,7 @@ const TakeAction = () => {
                                     </label>
                                     <textarea
                                         name="reason"
-                                        className={`w-full px-4 py-3 rounded-lg border border-gray-300 outline-none transition-all ${errors.reason ? "border-red-500" : ""}`}
+                                        className={`w-full px-4 py-2 rounded-lg border border-gray-300 outline-none transition-all ${errors.reason ? "border-red-500" : ""}`}
                                         value={formData.reason}
                                         onChange={handleChange}
                                         placeholder="Write reason for rejection"
