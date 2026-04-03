@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+
+import { useState } from "react";
 import { useUserContext } from "../../contexts/userContext";
-import { escapeRegExp } from "../../constants";
 import CustomTable from "../ui/CustomTable";
 import PaginationBar from "../ui/PaginationBar";
-import { NavLink } from "react-router-dom";
-import { MdEventNote, MdRotateLeft } from "react-icons/md";
+import { MdRotateLeft } from "react-icons/md";
 import { getSortingLogic } from "../../utils/getSortingLogic";
+import { useFilteredRows } from "../../hooks/useFilteredRows";
 
 const EmployeeLeaveRequests = () => {
 
@@ -25,80 +25,30 @@ const EmployeeLeaveRequests = () => {
         note: "",
         status: "",
     }
-    const [filters, setFilters] = useState(initialFiltersValue)
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        if (name === "minDays" || name === "maxDays") return setFilters(prev => ({ ...prev, days: { ...prev.days, [name]: value } }))
-        if (name === "startDate" || name === "endDate") return setFilters(prev => ({ ...prev, dateRange: { ...prev.dateRange, [name]: value } }))
-        setFilters(prev => ({ ...prev, [name]: value }))
-    }
 
     let initialData = leaveRequests.filter((request) => request.employeeId === user.id) ?? [];
 
-    const [filteredRequests, setFilteredRequests] = useState(initialData);
     const [rows, setRows] = useState([]);
 
-    useEffect(() => {
-
-        const handler = setTimeout(() => {
-            const { id, dateRange: { startDate, endDate }, days: { minDays, maxDays }, leaveType, note, status } = filters;
-
-            if (!id && !startDate && !endDate && !minDays && !maxDays && !leaveType && !note && !status) return setFilteredRequests(initialData);
-
-            const noteRegex = new RegExp(escapeRegExp(note), "i");
-
-            const newFilteredRequests = initialData.filter((currRequest) => {
-
-                const matchesId = id ? currRequest.id == id : true;
-                const matchesNote = noteRegex.test(String(currRequest.note ?? ""));
-
-                const matchesRange = (startDate && endDate)
-                    ? (new Date(currRequest.from) > new Date(startDate)) && new Date(currRequest.to) < new Date(endDate)
-                    : true
-
-                const matchesMinDays = minDays !== "" ? currRequest.days >= minDays : true;
-                const matchesMaxDays = maxDays !== "" ? currRequest.days <= maxDays : true;
-                const matchesLeaveType = leaveType !== "" ? currRequest.leaveType === leaveType : true;
-                const matchesStatus = status !== "" ? currRequest.status === status : true;
-
-                return matchesId && matchesNote && matchesRange && matchesMinDays && matchesMaxDays && matchesLeaveType && matchesStatus;
-            });
-
-            setFilteredRequests(newFilteredRequests);
-        }, 400);
-
-        return () => clearTimeout(handler);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filters]);
-
-    useEffect(() => {
-        if (filteredRequests.length === 0) {
-            setRows([]);
-        }
-    }, [filteredRequests]);
+    const { filters, filteredRequests, setFilteredRequests, clearFilters, handleChange } = useFilteredRows(initialData, initialFiltersValue, setRows);
 
     const columns = [
-        { Header: "Id", accessor: "id", filterBy: true, filterInputValue: filters.id, handleChange, sortBy: getSortingLogic(setFilteredRequests) },
-        { Header: "From", accessor: "from", filterBy: true, filterInputValue: filters.dateRange, handleChange, sortBy: getSortingLogic(setFilteredRequests) },
+        { Header: "Id", accessor: "id", filterBy: true, filterInputValue: filters.id, handleChange, sortBy: getSortingLogic(setFilteredRequests)  },
+        { Header: "From", accessor: "from", filterBy: true, filterInputValue: filters.dateRange, handleChange, sortBy: getSortingLogic(setFilteredRequests)  },
         { Header: "To", accessor: "to" },
-        { Header: "Days", accessor: "days", filterBy: true, filterInputValue: filters.days, handleChange, sortBy: getSortingLogic(setFilteredRequests) },
+        { Header: "Days", accessor: "days", filterBy: true, filterInputValue: filters.days, handleChange, sortBy: getSortingLogic(setFilteredRequests)  },
         { Header: "Leave Type", accessor: "leaveType", filterBy: true, filterInputValue: filters.leaveType, handleChange },
         { Header: "Note", accessor: "note", filterBy: true, filterInputValue: filters.note, handleChange },
         { Header: "Status", accessor: "status", filterBy: true, filterInputValue: filters.status, handleChange },
     ]
-
-    const clearFilters = () => {
-        setFilters(initialFiltersValue)
-    }
 
     return (
         <>
             <div className={`flex flex-col items-center gap-5 w-full min-w-0`}>
                 <div className="flex w-full justify-between items-center pb-3 border-b border-slate-300">
                     <div>
-                        <h1 className="text-2xl font-bold text-slate-800">Your Leave Requests</h1>
-                        <p className="text-slate-500 text-sm">Monitor your leave approvals, rejections, and pending requests in real-time.</p>
+                        <h1 className="text-2xl font-bold text-slate-800">Leave Requests</h1>
+                        <p className="text-sm text-slate-500">View details of all current leave requests that require immediate attention.</p>
                     </div>
 
                     {filteredRequests.length !== initialData.length && (
@@ -123,3 +73,4 @@ const EmployeeLeaveRequests = () => {
 };
 
 export default EmployeeLeaveRequests;
+
