@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import FilterIcon from "../Filters/FilterIcon";
 import { useState } from "react";
+import SortButton from "./SortButton";
 
 const CustomTable = ({ rows, columns }) => {
 
@@ -23,7 +24,10 @@ const CustomTable = ({ rows, columns }) => {
                             >
                                 <div className="relative flex items-center justify-between w-full">
                                     <span>{col.Header}</span>
-                                    {col.filterBy && <FilterIcon index={index} rows={rows} col={col} displayId={displayId} handleToggle={handleToggle} />}
+                                    <div className="flex items-center">
+                                        {col.sortBy && <SortButton sortBy={col.sortBy} accessor={col.accessor} />}
+                                        {col.filterBy && <FilterIcon index={index} rows={rows} col={col} displayId={displayId} handleToggle={handleToggle} />}
+                                    </div>
                                 </div>
                             </th>
                         ))}
@@ -74,7 +78,7 @@ const formattedValue = (value, accessor) => {
         return <span className="text-slate-300">--</span>;
     }
 
-    if(accessor === "from" || accessor === "to") return new Date(value).toLocaleDateString();
+    if (accessor === "from" || accessor === "to") return new Date(value).toLocaleDateString();
 
     if (accessor === "status") {
         return (

@@ -5,6 +5,7 @@ import CustomTable from "../ui/CustomTable";
 import PaginationBar from "../ui/PaginationBar";
 import { NavLink } from "react-router-dom";
 import { MdEventNote, MdRotateLeft } from "react-icons/md";
+import { getSortingLogic } from "../../utils/getSortingLogic";
 
 const EmployeeLeaveRequests = () => {
 
@@ -78,10 +79,10 @@ const EmployeeLeaveRequests = () => {
     }, [filteredRequests]);
 
     const columns = [
-        { Header: "Id", accessor: "id", filterBy: true, filterInputValue: filters.id, handleChange },
-        { Header: "From", accessor: "from", filterBy: true, filterInputValue: filters.dateRange, handleChange },
+        { Header: "Id", accessor: "id", filterBy: true, filterInputValue: filters.id, handleChange, sortBy: getSortingLogic(setFilteredRequests) },
+        { Header: "From", accessor: "from", filterBy: true, filterInputValue: filters.dateRange, handleChange, sortBy: getSortingLogic(setFilteredRequests) },
         { Header: "To", accessor: "to" },
-        { Header: "Days", accessor: "days", filterBy: true, filterInputValue: filters.days, handleChange },
+        { Header: "Days", accessor: "days", filterBy: true, filterInputValue: filters.days, handleChange, sortBy: getSortingLogic(setFilteredRequests) },
         { Header: "Leave Type", accessor: "leaveType", filterBy: true, filterInputValue: filters.leaveType, handleChange },
         { Header: "Note", accessor: "note", filterBy: true, filterInputValue: filters.note, handleChange },
         { Header: "Status", accessor: "status", filterBy: true, filterInputValue: filters.status, handleChange },

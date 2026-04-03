@@ -5,6 +5,7 @@ import { escapeRegExp } from "../../constants";
 import CustomTable from "../ui/CustomTable";
 import PaginationBar from "../ui/PaginationBar";
 import { MdRotateLeft } from "react-icons/md";
+import { getSortingLogic } from "../../utils/getSortingLogic";
 
 const ProjectManagerLeaveRequests = () => {
 
@@ -96,11 +97,11 @@ const ProjectManagerLeaveRequests = () => {
   }, [filteredRequests]);
 
   const columns = [
-    { Header: "Id", accessor: "id", filterBy: true, filterInputValue: filters.id, handleChange },
-    { Header: "Employee Name", accessor: "employeeName", filterBy: true, filterInputValue: filters.employeeName, handleChange },
-    { Header: "From", accessor: "from", filterBy: true, filterInputValue: filters.dateRange, handleChange },
+    { Header: "Id", accessor: "id", filterBy: true, filterInputValue: filters.id, handleChange, sortBy: getSortingLogic(setFilteredRequests) },
+    { Header: "Employee Name", accessor: "employeeName", filterBy: true, filterInputValue: filters.employeeName, handleChange, sortBy: getSortingLogic(setFilteredRequests) },
+    { Header: "From", accessor: "from", filterBy: true, filterInputValue: filters.dateRange, handleChange, sortBy: getSortingLogic(setFilteredRequests) },
     { Header: "To", accessor: "to" },
-    { Header: "Days", accessor: "days", filterBy: true, filterInputValue: filters.days, handleChange },
+    { Header: "Days", accessor: "days", filterBy: true, filterInputValue: filters.days, handleChange, sortBy: getSortingLogic(setFilteredRequests) },
     { Header: "Leave Type", accessor: "leaveType", filterBy: true, filterInputValue: filters.leaveType, handleChange },
     { Header: "Note", accessor: "note", filterBy: true, filterInputValue: filters.note, handleChange },
     { Header: "Status", accessor: "status", filterBy: true, filterInputValue: filters.status, handleChange },

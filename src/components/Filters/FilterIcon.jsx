@@ -14,13 +14,15 @@ const FilterIcon = ({ index, col, displayId, handleToggle, rows }) => {
                 className="cursor-pointer"
             />
             {displayId === index && (
-                <FilterPopUp
-                    rows={rows}
-                    accessor={col.accessor}
-                    value={col.filterInputValue}
-                    handleChange={col.handleChange}
-                    iconRef={iconRef}
-                />
+                <div>
+                    <FilterPopUp
+                        rows={rows}
+                        accessor={col.accessor}
+                        value={col.filterInputValue}
+                        handleChange={col.handleChange}
+                        iconRef={iconRef}
+                    />
+                </div>
             )}
         </div>
     );
