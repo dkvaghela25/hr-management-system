@@ -1,14 +1,15 @@
 import { NavLink } from "react-router-dom";
+import FilterIcon from "../Filters/FilterIcon";
 import { useState } from "react";
-import { FaFilter } from "react-icons/fa";
-import FilterPopUp from "../Filters/FilterPopUp";
 
 const CustomTable = ({ rows, columns }) => {
+
 
     const [displayId, setDisplayId] = useState(false);
     const handleToggle = (index) => {
         setDisplayId(prev => prev === index ? false : index)
     }
+
 
     return (
         <div className="w-full overflow-x-auto rounded-xl border border-slate-200 shadow-sm bg-white">
@@ -22,10 +23,7 @@ const CustomTable = ({ rows, columns }) => {
                             >
                                 <div className="relative flex items-center justify-between w-full">
                                     <span>{col.Header}</span>
-                                    {col.filterBy && <div className="relative">
-                                        <FaFilter onClick={() => handleToggle(index)} className="cursor-pointer" />
-                                        {displayId === index && <FilterPopUp accessor={col.accessor} value={col.filterInputValue} handleChange={col.handleChange} />}
-                                    </div>}
+                                    {col.filterBy && <FilterIcon index={index} col={col} displayId={displayId} handleToggle={handleToggle} />}
                                 </div>
                             </th>
                         ))}
