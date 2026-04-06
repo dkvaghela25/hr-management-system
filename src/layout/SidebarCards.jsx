@@ -20,8 +20,8 @@ const SidebarCards = () => {
 
     return (
         <div className="w-[8%] bg-[#111827] text-white fixed h-screen flex flex-col border-r border-slate-800 top-0">
-            <div className="text-center px-1 py-5 border-b border-slate-500">
-                <img src="./images/hrms_logo_sidebarcard.svg" alt="HRMS Logo" className="w-full max-w-80" />
+            <div className="flex py-7 justify-center border-b border-slate-500">
+                <div class="font-serif text-2xl">HRMS</div>
             </div>
 
             <nav className="flex-1 space-y-8">
