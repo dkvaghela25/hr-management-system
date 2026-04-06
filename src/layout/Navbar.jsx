@@ -29,7 +29,7 @@ const Navbar = () => {
         <div className="flex items-center gap-3">
           <div className="flex flex-col items-end">
             <span className="font-bold text-slate-900 text-lg leading-tight">Welcome, {user ? user.name : "Guest"}</span>
-            {user && <span className="text-indigo-600 text-xs font-semibold uppercase tracking-wider">{user.role}, {user.department} Department</span>}
+            {user && <span className="text-indigo-600 text-xs font-semibold uppercase tracking-wider">{user.role.replace('_', ' ')}, {user.department} Department</span>}
           </div>
           <img
             onClick={openMenu}

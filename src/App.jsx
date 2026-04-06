@@ -11,28 +11,42 @@ import ErrorPage from "./pages/ErrorPage";
 import UserList from "./pages/UserList";
 import LoginPage from "./pages/LoginPage";
 import PublicRoutes from "./routes/PublicRoutes";
+import ProjectManagerLayout from "./layout/ProjectManagerLayout";
+import { useUserContext } from "./contexts/userContext";
+import HRLayout from "./layout/HRLayout";
+import EmployeeLayout from "./layout/EmployeeLayout";
 
 const App = () => {
 
+  const { user } = useUserContext();
+
+  const getUserLayout = () => {
+    switch (user?.role) {
+      case "HR": return <HRLayout />;
+      case "PROJECT_MANAGER": return <ProjectManagerLayout />
+      case "EMPLOYEE": return <EmployeeLayout />
+    }
+  }
+
   const router = createBrowserRouter([
     {
-      path: '/',
-      element: <AppLayout />,
-      errorElement: <ErrorPage />,
+      element: <PublicRoutes />,
       children: [
         {
-          element: <PublicRoutes />,
-          children: [
-            {
-              path: '/login',
-              element: <LoginPage />
-            },
-            {
-              path: '/user_list',
-              element: <UserList />
-            },
-          ]
+          path: '/login',
+          element: <LoginPage />
         },
+        {
+          path: '/user_list',
+          element: <UserList />
+        },
+      ]
+    },
+    {
+      path: '/',
+      element: getUserLayout(),
+      errorElement: <ErrorPage />,
+      children: [
         {
           element: <ProtectedRoutes />,
           children: [

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 64" width="160" height="64">
+  <!-- Wordmark shifted left -->
+  <text x="0" y="34" font-family="Georgia, 'Times New Roman', serif" font-size="26" font-weight="700" fill="white">HRMS</text>
+
+  <!-- Tagline shifted left to match -->
+  <text x="2" y="48" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="600" fill="#A5B4FC" letter-spacing="2">PEOPLE · PERFORMANCE</text>
+</svg>

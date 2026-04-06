@@ -2,10 +2,10 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 
-const AppLayout = () => {
+const HRLayout = () => {
 
   return (
-    <div className="relative flex min-h-screen bg-slate-100 overflow-x-hidden">
+    <div className="relative flex min-h-screen bg-gray-100 overflow-x-hidden">
       <Sidebar />
 
       <div className="absolute w-[82%] -right-1 flex flex-col min-w-0 overflow-x-hidden">
@@ -18,4 +18,4 @@ const AppLayout = () => {
   );
 };
 
-export default AppLayout;
+export default HRLayout;

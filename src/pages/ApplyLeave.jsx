@@ -86,7 +86,7 @@ const ApplyLeave = () => {
     return (
         <>
             <div className="w-full h-full flex items-center justify-center p-4">
-                <div className="w-[45%] bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+                <div className="w-[50%] bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
                     <div className="p-8">
                         <div className="text-center mb-8">
                             <h1 className="text-3xl font-bold text-gray-800">Apply Leave</h1>

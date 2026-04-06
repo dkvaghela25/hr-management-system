@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { departments, randomCharacters, randomFirstName, randomLastName, randomMiddleName, roles } from "../constants";
 import { useUserContext } from "../contexts/userContext";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { getRandomElement } from "../utils/getRandomElement";
 import UserData from "../components/UserData";
@@ -70,8 +70,8 @@ const LoginPage = () => {
 
   return (
     <>
-      <div className="w-full h-full flex items-center justify-center p-4">
-        <div className="w-[45%] bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+      <div className="w-full h-screen bg-slate-100 flex items-center justify-center p-4">
+        <div className="w-[35%] bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
 
           <div className="p-8">
             <div className="text-center mb-8">
@@ -127,13 +127,23 @@ const LoginPage = () => {
                   <MdLogin size={20} /> Login
                 </button>
 
-                <button
-                  type="button"
-                  onClick={handleClick}
-                  className="w-full bg-gray-50 hover:bg-gray-100 text-gray-600 font-medium py-2 rounded-lg border border-gray-200 transition-colors text-sm"
-                >
-                  {!newUser ? "Generate Random User" : "Show New User Data"}
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={handleClick}
+                    className="w-full bg-gray-50 hover:bg-gray-100 text-gray-600 font-medium py-2 rounded-lg border border-gray-200 transition-colors text-sm"
+                  >
+                    {!newUser ? "Generate Random User" : "Show New User Data"}
+                  </button>
+                  <NavLink className="w-full" to="/user_list">
+                    <button
+                      type="button"
+                      className="w-full bg-gray-50 hover:bg-gray-100 text-gray-600 font-medium py-2 rounded-lg border border-gray-200 transition-colors text-sm"
+                    >
+                      Open User List
+                    </button>
+                  </NavLink>
+                </div>
               </div>
             </form>
           </div>
